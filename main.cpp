@@ -1,3 +1,8 @@
+// INTEGRANTES:
+// Alessandro Luis Pinheiro da Rocha Junior - 223087
+// Felipe Ferreira Rangel de Almeida - 2208490
+// Mateus Tiraboschi de Castro - 
+
 #include <iostream>
 #include <string>
 using namespace std;
@@ -7,16 +12,12 @@ const int larguradisplay = 50;
 void Logo();
 void Centralizar(int largura, string text);
 
-int main(){
-    // formatação
-    const string RED = "\033[31m";
-    const string BOLDRED = "\033[31m";
-    const string GREEN = "\033[32m";
-    const string BLUE = "\033[34m";
-    const string RESET = "\033[0m";
-    
+// g++ main.cpp -o jogo.exe  <=== COMPILAR
+// .\jogo.exe                <=== RODAR
 
+int main(){
     Logo();
+
 
     return 0;
 }
