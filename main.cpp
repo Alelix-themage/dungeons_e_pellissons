@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <string>
+#include "Dungeons.h"
 using namespace std;
 
 const int larguradisplay = 50;
@@ -16,8 +17,9 @@ void Centralizar(int largura, string text);
 // .\jogo.exe                <=== RODAR
 
 int main(){
+    const int niveis = 5;
+    const int tamanhomapa = 15;
     Logo();
-
 
     return 0;
 }
