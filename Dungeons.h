@@ -5,8 +5,11 @@
 
 #include <string>
 #include <iostream>
-#include <string>
 using namespace std;
+
+
+#ifndef DUNGEONS_H
+#define DUNGEONS_H
 
 //Uma função Global que gera danos nos personagens
 void ReceberDano(int dano);
@@ -34,12 +37,14 @@ class Monstro {
 
     private:
         string nome;
-        int vida; //50
+        int vida = 50; //50
     
 };
 
 struct Arma {
     //tipo de dado responsável pelas especificações da arma
-    int dano; //25
+    int dano = 25; //25
 
 };
+
+#endif
