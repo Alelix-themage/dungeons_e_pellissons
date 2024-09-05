@@ -16,7 +16,7 @@ const string RESET = "\033[0m";
 
 void Logo();
 void Centralizar(int largura, string text);
-void CriarNiveis(Nivel &vetorniveis);
+
 void display(int &nivelatual, int &sqmatual);
 
 // g++ main.cpp -o jogo.exe  <=== COMPILAR
