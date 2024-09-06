@@ -37,13 +37,15 @@ int main(){
     Centralizar(larguradisplay,"PRESSIONE QUALQUER TECLA PARA INICIAR...");
     start = cin.get();
     cout << "----------------------------------------------------\n" << RESET;
-    cout << RED << " - Nome do seu heroi -----> ";
+    cout << RED << " - Nome do seu heroi -----> " << RESET;
     string n;
     getline(cin, n);
     player.DefinirNome(n);
     cout << RED << "----------------------------------------------------\n" << RESET;
     while(!fim){
         display(nivelatual, sqmatual, player);
+        
+        
         if (sqmatual == tamanho_mapa){
             nivelatual++;
             sqmatual = 1;
@@ -81,7 +83,7 @@ void Logo(){
 void display(int &nivelatual, int &sqmatual, Heroi player){
     cout << RED << "NIVEL: " << RESET << nivelatual << RED << " | " << nomesniveis[nivelatual-1] << " | PROGRESSO: " << RESET << sqmatual << "/" << tamanho_mapa << endl;
     cout << RED << "----------------------------------------------------\n" << RESET;
-    cout << RED << player.Nome() << endl;
+    cout << RED << "HEROI: " << RESET << player.Nome() << endl;
     cout << RED << "----------------------------------------------------\n\n" << RESET;
 }
 
