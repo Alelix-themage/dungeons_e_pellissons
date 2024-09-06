@@ -25,7 +25,7 @@ void display(int &nivelatual, int &sqmatual);
 // .\jogo.exe                <=== RODAR
 
 int main(){
-    
+    const string nomesniveis[num_niveis];
     char start;
     int nivelatual = 1;
     int sqmatual = 1;
