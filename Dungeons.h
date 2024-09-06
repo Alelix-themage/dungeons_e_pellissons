@@ -8,9 +8,6 @@
 using namespace std;
 
 
-#ifndef DUNGEONS_H
-#define DUNGEONS_H
-
 //Uma função Global que gera danos nos personagens
 void ReceberDano(int dano);
 
@@ -21,7 +18,6 @@ class Heroi{
         Heroi();
         ~Heroi();
         void EscolherNome(string nome);
-
     private:  
         // nome e vida do Herói só pode ser acessada por métodos da classe herói
         string nome; 
@@ -46,5 +42,3 @@ struct Arma {
     int dano = 25; //25
 
 };
-
-#endif

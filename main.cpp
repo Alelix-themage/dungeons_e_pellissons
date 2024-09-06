@@ -5,38 +5,45 @@
 
 #include <iostream>
 #include <string>
-#include "Dungeons.h"
+#include "Heroi.h"
 using namespace std;
 
-const int larguradisplay = 50;
+const int larguradisplay = 52;
 const int tamanho_mapa = 15;
 const int num_niveis = 5;
+const string nomesniveis[num_niveis] = {"Estrada da Main", "Floresta Binaria", "Montanha Pilha de Neve", "Vulcao Recursivo", "Fortaleza dos Dados"}; // nomes de exemplo
 const string RED = "\033[1;31m";
 const string RESET = "\033[0m";
 
 void Logo();
 void Centralizar(int largura, string text);
+void display(int &nivelatual, int &sqmatual, Heroi player);
 
-void display(int &nivelatual, int &sqmatual);
-
-// g++ main.cpp -o jogo.exe  <=== COMPILAR
-// g++ -std=c++11  main.cpp -o jogo.exe
+// g++ main.cpp Heroi.cpp -o jogo.exe  <=== COMPILAR
+// g++ -std=c++11 Heroi.cpp main.cpp -o jogo.exe
 
 // .\jogo.exe                <=== RODAR
 
 int main(){
-    const string nomesniveis[num_niveis];
+
     char start;
     int nivelatual = 1;
     int sqmatual = 1;
     bool fim = false;
 
+    Heroi player;
+
     Logo();
     Centralizar(larguradisplay,"PRESSIONE QUALQUER TECLA PARA INICIAR...");
-    cout << "--------------------------------------------------\n" << RESET;
     start = cin.get();
+    cout << "----------------------------------------------------\n" << RESET;
+    cout << RED << " - Nome do seu heroi -----> ";
+    string n;
+    getline(cin, n);
+    player.DefinirNome(n);
+    cout << RED << "----------------------------------------------------\n" << RESET;
     while(!fim){
-        display(nivelatual, sqmatual);
+        display(nivelatual, sqmatual, player);
         if (sqmatual == tamanho_mapa){
             nivelatual++;
             sqmatual = 1;
@@ -46,6 +53,7 @@ int main(){
         if (nivelatual == num_niveis && sqmatual == tamanho_mapa){
             fim = true;
         }
+
     }
     cout << "FIM";
 
@@ -55,25 +63,26 @@ int main(){
 void Logo(){
     
 
-    cout << RED << "--------------------------------------------------\n";
-    cout << "                          ,    ,    /\\   /\\\n";
-    cout << "     ____                /( /\\ )\\  _\\ \\_/ /_\n";
-    cout << "    /\\' .\\    _____      |\\_||_/| < \\_   _/ >\n";
-    cout << "   /: \\___\\  / .  /\\     \\______/ \\| 0   0 |/\n";
-    cout << "   \\' / . / /____/..\\      _\\/__  _(_  ^  _)_\n";
-    cout << "    \\/___/  \\'  '\\  /     ( () ) /`\\|V\"\"\"V|/`\\\n";
-    cout << "             \\'__'\\/        {}   \\  \\_____\\/  /\n";
-    cout << "                            ()   /\\   )=(   /\\\n";
-    cout << "                            {}  /  \\_/\\=/\\_/  \\\n";
-    cout << "--------------------------------------------------\n";
+    cout << RED << "----------------------------------------------------\n";
+    cout << "                           ,    ,    /\\   /\\\n";
+    cout << "      ____                /( /\\ )\\  _\\ \\_/ /_\n";
+    cout << "     /\\' .\\    _____      |\\_||_/| < \\_   _/ >\n";
+    cout << "    /: \\___\\  / .  /\\     \\______/ \\| 0   0 |/\n";
+    cout << "    \\' / . / /____/..\\      _\\/__  _(_  ^  _)_\n";
+    cout << "     \\/___/  \\'  '\\  /     ( () ) /`\\|V\"\"\"V|/`\\\n";
+    cout << "              \\'__'\\/        {}   \\  \\_____\\/  /\n";
+    cout << "                             ()   /\\   )=(   /\\\n";
+    cout << "                             {}  /  \\_/\\=/\\_/  \\\n";
+    cout << "----------------------------------------------------\n";
     Centralizar(larguradisplay, "-= DUNGEONS & PELLISSONS =-");
     cout << "--------------------------------------------------"  << endl;;
 }
 
-void display(int &nivelatual, int &sqmatual){
-    cout << RED << "NIVEL: " << RESET << nivelatual << RED << "   |   PROGRESSO: " << RESET << sqmatual << "/" << tamanho_mapa << endl;
-    cout << RED << "--------------------------------------------------\n" << RESET;
-
+void display(int &nivelatual, int &sqmatual, Heroi player){
+    cout << RED << "NIVEL: " << RESET << nivelatual << RED << " | " << nomesniveis[nivelatual-1] << " | PROGRESSO: " << RESET << sqmatual << "/" << tamanho_mapa << endl;
+    cout << RED << "----------------------------------------------------\n" << RESET;
+    cout << RED << player.Nome() << endl;
+    cout << RED << "----------------------------------------------------\n\n" << RESET;
 }
 
 void Centralizar(int largura, string texto){
