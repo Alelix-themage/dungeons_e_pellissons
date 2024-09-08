@@ -23,10 +23,15 @@ void Heroi::DefinirNome(string n){
 
 string Heroi::Nome(){
     return nome;
-}
+};
 
 int Heroi::RetornarHP(){
     return vida;
-}
+};
+
+void Heroi::TomarDano(int dano){
+    vida -= dano;
+    cout << "O heroi tomou " << dano << " de dano!" << endl;
+};
 
 #endif
