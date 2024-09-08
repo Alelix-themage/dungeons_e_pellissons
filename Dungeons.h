@@ -5,6 +5,7 @@
 
 #include <string>
 #include <iostream>
+#include "Pocao.h"
 using namespace std;
 
 
@@ -15,6 +16,7 @@ void ReceberDano(int dano);
 //Classe responsável pelas funcionalidades e atributos do heroi
 class Heroi{
     public:
+        void tomarPocao();
         Heroi();
         ~Heroi();
         void EscolherNome(string nome);

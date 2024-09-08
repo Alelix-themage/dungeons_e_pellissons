@@ -6,6 +6,7 @@
 #include <iostream>
 #include <string>
 #include "Heroi.h"
+#include "Pocao.h"
 using namespace std;
 
 const int larguradisplay = 52;
@@ -42,9 +43,10 @@ int main(){
     getline(cin, n);
     player.DefinirNome(n);
     cout << RED << "----------------------------------------------------\n" << RESET;
+
     while(!fim){
+        //Displayy Caraiii
         display(nivelatual, sqmatual, player);
-        
         
         if (sqmatual == tamanho_mapa){
             nivelatual++;
@@ -83,7 +85,7 @@ void Logo(){
 void display(int &nivelatual, int &sqmatual, Heroi player){
     cout << RED << "NIVEL: " << RESET << nivelatual << RED << " | " << nomesniveis[nivelatual-1] << " | PROGRESSO: " << RESET << sqmatual << "/" << tamanho_mapa << endl;
     cout << RED << "----------------------------------------------------\n" << RESET;
-    cout << RED << "HEROI: " << RESET << player.Nome() << endl;
+    cout << RED << "HEROI: " << RESET << player.Nome() << player.RetornarHP() << endl;
     cout << RED << "----------------------------------------------------\n\n" << RESET;
 }
 
