@@ -14,7 +14,7 @@ Heroi::Heroi(){
 };
 
 Heroi::~Heroi(){
-
+    
 };
 
 void Heroi::DefinirNome(string n){
@@ -29,9 +29,8 @@ int Heroi::RetornarHP(){
     return vida;
 };
 
-void Heroi::TomarDano(int dano){
-    vida -= dano;
-    cout << "O heroi tomou " << dano << " de dano!" << endl;
+void Heroi::TomarPocao(int cura){
+    vida += cura;
 };
 
 #endif

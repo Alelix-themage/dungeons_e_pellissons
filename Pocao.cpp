@@ -5,12 +5,18 @@ using namespace std;
 
 #ifndef POCAO_H
 #define POCAO_H
-void Pocao::CuraHeroi(int &vida){
-    vida = vida + cura;
-    cout << "O heroi ganhou +" << vida << endl;
+
+Pocao::Pocao(){
 
 }
 
+Pocao::~Pocao(){
+
+}
+
+int Pocao::RetornarCura(){
+    return cura;
+}
 
 
 #endif

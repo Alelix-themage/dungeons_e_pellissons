@@ -20,7 +20,7 @@ void Logo();
 void Centralizar(int largura, string text);
 void display(int &nivelatual, int &sqmatual, Heroi player);
 
-// g++ main.cpp Heroi.cpp -o jogo.exe  <=== COMPILAR
+// g++ main.cpp Heroi.cpp Pocao.cpp -o jogo.exe  <=== COMPILAR
 // g++ -std=c++11 Heroi.cpp main.cpp -o jogo.exe
 
 // .\jogo.exe                <=== RODAR
@@ -47,7 +47,11 @@ int main(){
     while(!fim){
         //Displayy Caraiii
         display(nivelatual, sqmatual, player);
-        
+        Pocao p1;
+
+        player.TomarPocao(p1.RetornarCura());
+
+        // Finalizar "Round"
         if (sqmatual == tamanho_mapa){
             nivelatual++;
             sqmatual = 1;
@@ -57,7 +61,6 @@ int main(){
         if (nivelatual == num_niveis && sqmatual == tamanho_mapa){
             fim = true;
         }
-
     }
     cout << "FIM";
 
@@ -85,7 +88,7 @@ void Logo(){
 void display(int &nivelatual, int &sqmatual, Heroi player){
     cout << RED << "NIVEL: " << RESET << nivelatual << RED << " | " << nomesniveis[nivelatual-1] << " | PROGRESSO: " << RESET << sqmatual << "/" << tamanho_mapa << endl;
     cout << RED << "----------------------------------------------------\n" << RESET;
-    cout << RED << "HEROI: " << RESET << player.Nome() << player.RetornarHP() << endl;
+    cout << RED << "HEROI: " << RESET << player.Nome() << RED << " | HP: " << player.RetornarHP() << endl;
     cout << RED << "----------------------------------------------------\n\n" << RESET;
 }
 
