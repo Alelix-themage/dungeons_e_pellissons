@@ -11,7 +11,7 @@ class Mochila{
     
 
 
-    private:
+    private: //alek bocó 
 
     int *itens; // ponteiro para mostrar itens da mochila
     int topo; // mostra o item do topo
