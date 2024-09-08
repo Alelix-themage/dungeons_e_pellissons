@@ -3,16 +3,16 @@ class Mochila{
     public:
         Mochila();
         ~Mochila();
-        int mochila;
-        void Push(int x);
-        void Pop(int &x);
-        bool Full ();
-        bool Empty ();
+        void MochilaPush(int x);
+        void MochilaPop(int &x);
+        bool MochilaFull ();
+        bool MochilaEmpty ();
     
 
 
-    private: //alek bocó 
-    // amor, to morrendo de saudade de voce
+    private:
+    //Mochila não tem tamnho
+    
 
     int *itens; // ponteiro para mostrar itens da mochila
     int topo; // mostra o item do topo
