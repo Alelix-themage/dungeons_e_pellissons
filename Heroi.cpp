@@ -14,7 +14,7 @@ Heroi::Heroi(){
 };
 
 Heroi::~Heroi(){
-
+    
 };
 
 void Heroi::DefinirNome(string n){
@@ -23,10 +23,14 @@ void Heroi::DefinirNome(string n){
 
 string Heroi::Nome(){
     return nome;
-}
+};
 
 int Heroi::RetornarHP(){
     return vida;
-}
+};
+
+void Heroi::TomarPocao(int cura){
+    vida += cura;
+};
 
 #endif

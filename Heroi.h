@@ -14,6 +14,8 @@ class Heroi{
         void DefinirNome(string n);
         int RetornarHP();
         string Nome();
+        void TomarPocao(int cura);
+        void TomarDano(int dano);
     private:  
         // nome e vida do Herói só pode ser acessada por métodos da classe herói
         string nome; 
