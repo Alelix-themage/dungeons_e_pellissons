@@ -10,7 +10,7 @@ const string RESET = "\033[0m";
 #define HEROI_H
 
 Heroi::Heroi(){
-    vida = 10;
+    vida = 100;
 };
 
 Heroi::~Heroi(){
