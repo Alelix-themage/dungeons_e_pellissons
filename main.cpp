@@ -18,22 +18,22 @@ const int num_niveis = 2;
 const string RED = "\033[1;31m";
 const string RESET = "\033[0m";
 
-// ANUNCIAR EVETNO
-static const string frasesInimigo[5] = {
+// ANUNCIAR EVENTO
+static const string frasesInimigo[5] = { // frases quando encontrar um inimigo
     "Voce encontrou um inimigo feroz!",
     "Um inimigo apareceu magicamente!",
     "Cuidado! Um inimigo esta a espreita!",
     "Um inimigo bloqueia seu caminho!",
     "A sombra de um inimigo surge na sua frente!"
 };
-static const string frasesNada[5] = {
+static const string frasesNada[5] = { // frases quando n encontrar nada
     "O caminho esta vazio.",
     "Voce nao encontrou nada de interessante.",
     "Nada a vista. Continue explorando.",
     "Parece que nao ha nada aqui.",
     "Tudo quieto. Pode tomar um ar."
 };
-static const string frasesTesouro[5] = {
+static const string frasesTesouro[5] = { // frases quando encontrar elemento
     "Voce encontrou um bau de tesouro!",
     "Parabens! Um tesouro esta a sua frente!",
     "Tesouro descoberto! O que sera que tem dentro?",
@@ -50,7 +50,7 @@ const string nomesniveis[5] = {
     "Fortaleza dos Dados"
 };
 
-// GERADOR NUMEROS RADNOM
+// GERADOR NUMEROS RANDOM
 random_device rd;
 mt19937 gen(rd());
 
@@ -77,37 +77,37 @@ int main(){
 
     Logo();
     Centralizar(larguradisplay,"PRESSIONE 'ENTER' PARA INICIAR...");
-    char next = cin.get();
+    char next = cin.get(); // enter para avançar
     cout << RED << "----------------------------------------------------\n" << RESET;
     cout << RED << " - Nome do seu heroi -----> " << RESET;
     string n;
     getline(cin, n);
     player.DefinirNome(n);
     
-
+    // LOOP PRINCIPAL DO JOGO
     while(!fim){
         //Display
-        Display(nivelatual, sqmatual, player);
+        Display(nivelatual, sqmatual, player); // func q mostra nivel, vida, nome, progresso
         
         // Iniciar Round
-        short int tipoevento;
-        SortearEvento(tipoevento);
-        AnunciarEvento(tipoevento);
+        short int tipoevento; // variavel pra setar o q vai ser no nivel
+        SortearEvento(tipoevento); // funcao pra gerar aleatorimente o q vai ser
+        AnunciarEvento(tipoevento); // imprimir pro player o que e
         
 
         // Switch entre batalha, vazio e elemento
         switch (tipoevento)
         {
         case 1:
-            // BATALHA
+            // IMPLEMENTAR BATALHA
 
             break;
         case 2:
-            // VAZIO
+            // IMPLEMENTAR VAZIO
 
             break;
         case 3:
-            // ELEMENTO
+            // IMPLEMENTAR ELEMENTO
 
             break;
         default:
@@ -185,6 +185,7 @@ void AnunciarEvento(short int evento){
     uniform_int_distribution<> distr(0, 4);
     int random = distr(gen);
 
+    // recebe qual o tipo de evento e imprime uma frase random do vetor
     switch (evento)
         {
         case 1:
