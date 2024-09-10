@@ -94,21 +94,21 @@ int main(){
         SortearEvento(tipoevento); // funcao pra gerar aleatorimente o q vai ser
         AnunciarEvento(tipoevento); // imprimir pro player o que e
         
+        Pocao ptemp;
+        ptemp.CriarPocao(nivelatual);
 
         // Switch entre batalha, vazio e elemento
-        switch (tipoevento)
-        {
-        case 1:
+        switch (tipoevento) {
+        case 1: 
             // IMPLEMENTAR BATALHA
-
+            player.TomarDano(5); // teste
             break;
         case 2:
             // IMPLEMENTAR VAZIO
-
             break;
         case 3:
             // IMPLEMENTAR ELEMENTO
-
+            player.TomarPocao(ptemp.Curar());
             break;
         default:
             break;

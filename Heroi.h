@@ -19,6 +19,7 @@ class Heroi{
     private:  
         // nome e vida do Herói só pode ser acessada por métodos da classe herói
         string nome; 
-        int vida;
+        int vidaatual = 100;
+        const int maxvida = 100;
 };
 

@@ -10,7 +10,7 @@ const string RESET = "\033[0m";
 #define HEROI_H
 
 Heroi::Heroi(){
-    vida = 100;
+    
 };
 
 Heroi::~Heroi(){
@@ -26,11 +26,22 @@ string Heroi::Nome(){
 };
 
 int Heroi::RetornarHP(){
-    return vida;
+    return vidaatual;
 };
 
+void Heroi::TomarDano(int dano){
+    vidaatual -= dano;
+    cout << "Voce tomou "
+}
+
 void Heroi::TomarPocao(int cura){
-    vida += cura;
+    int vidaantesdacura = vidaatual;
+    if (vidaatual + cura > maxvida) {
+    vidaatual = maxvida; // verificar se não vai curar a mais do max de vida do heroi
+} else {
+    vidaatual += cura; 
+}
+    cout << "Voce tomou a pocao e recuperou " << vidaatual - vidaantesdacura << " pontos de HP";
 };
 
 #endif
