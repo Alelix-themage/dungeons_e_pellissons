@@ -4,7 +4,7 @@ using namespace std;
 
 Cinto::Cinto(){
     //Inicializar o contador
-    int count = 0;
+    count = 0;
 }
 
 Cinto::~Cinto(){
