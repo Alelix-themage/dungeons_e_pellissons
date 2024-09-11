@@ -31,7 +31,7 @@ int Heroi::RetornarHP(){
 
 void Heroi::TomarDano(int dano){
     vidaatual -= dano;
-    cout << "Voce tomou "
+    cout << "Voce tomou " << dano << " de dano." << endl;
 }
 
 void Heroi::TomarPocao(int cura){
