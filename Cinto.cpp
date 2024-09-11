@@ -22,7 +22,7 @@ bool Cinto::CintoCheio(){
 }
 
 void Cinto::InserirItem(int x, int p){
-    if(CintoCheio){
+    if(CintoCheio()){
         cout << "O cinto esta cheio! Nao e possivel adicionar outro item." << endl;
         abort();
     }
@@ -43,7 +43,7 @@ void Cinto::InserirItem(int x, int p){
 }
 
 void Cinto::DeletarItem(int &x, int p){
-    if(CintoVazio){
+    if(CintoVazio()){
         cout << "Nao ha itens para retirar." << endl;
     }
 
@@ -61,14 +61,11 @@ void Cinto::DeletarItem(int &x, int p){
 
 int Cinto::TamanhoCinto(){
     // Retorna o tamanho da Mochila e os itens inseridos
-    if(CintoVazio){
+    if(CintoVazio()){
         cout << "Ainda nao ha itens no cinto!" << endl;
     }
     else{
-        cout << "Seu cinto possui: "  << endl;
-        for(int i = 0; i < count; i++){
-            cout  << count << " itens" << endl;
-        }     
+        cout << "Seu cinto possui: " << count << " itens" << endl;
     }
 
 }
@@ -80,6 +77,7 @@ void Cinto::LimparCinto(){
 }
 
 void Cinto::RetornaItem(int &x, int p){
+    //Retorno dos itens que o Heroi possui
     if( p < 1 || p > count +1){
         cout << "Nao existem itens nessa posicao!" << endl;
         abort();
