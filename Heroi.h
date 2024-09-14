@@ -4,7 +4,8 @@
 // Mateus Tiraboschi de Castro - 2200040
 
 #include <string>
-#include <iostream>
+#include "Cinto.h"
+#include "Mochila.h"
 using namespace std;
 
 class Heroi{
@@ -21,5 +22,10 @@ class Heroi{
         string nome; 
         int vidaatual = 100;
         const int maxvida = 100;
+        
+        //Cinto e Mochila do Heroi
+        Cinto cintoHeroi;
+        Mochila mochilaHeroi;
+
 };
 
