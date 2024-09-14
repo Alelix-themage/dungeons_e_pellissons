@@ -18,11 +18,13 @@ Cinto::~Cinto(){
 
 bool Cinto::CintoVazio(){
     count == 0;
+    cout << "O cinto esta vazio! E possivel inserir um item" << endl;
     return 0;
 }
 
 bool Cinto::CintoCheio(){
     count == MAX_CINTO;
+    cout << "Nao e possivel adicionar itens, o cinto esta cheio!" << endl;
     return 0;
 }
 
