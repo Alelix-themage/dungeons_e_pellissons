@@ -4,6 +4,8 @@
 // Mateus Tiraboschi de Castro - 2200040
 
 #include <string>
+#include "Cinto.h"
+#include "Mochila.h"
 using namespace std;
 
 class Heroi{

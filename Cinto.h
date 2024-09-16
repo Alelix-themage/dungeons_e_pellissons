@@ -4,7 +4,7 @@
 // Mateus Tiraboschi de Castro - 2200040
 
 #include <iostream>
-#include "Pocao.h"
+#include "Elemento.h"
 //Classe responsável pelo cinto do Heroi
 
 const int MAX_CINTO = 10;
@@ -25,5 +25,4 @@ class Cinto{
         private:
             int Entry[MAX_CINTO + 1];
             int count;
-
 };

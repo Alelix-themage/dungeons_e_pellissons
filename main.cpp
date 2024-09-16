@@ -8,7 +8,6 @@
 #include <random>
 #include "Heroi.h"
 #include "Elemento.h"
-#include "Pocao.h"
 using namespace std;
 
 
@@ -63,8 +62,8 @@ void SortearEvento(short int &tipo);
 void AnunciarEvento(short int tipo);
 
 
-// g++ main.cpp Heroi.cpp Pocao.cpp -o jogo.exe  <=== COMPILAR
-// g++ -std=c++11 main.cpp Heroi.cpp Pocao.cpp Elemento.cpp -o jogo.exe
+// g++ main.cpp Heroi.cpp Elemento.cpp -o jogo.exe  <=== COMPILAR
+// g++ -std=c++11 main.cpp Heroi.cpp Elemento.cpp -o jogo.exe
 
 // .\jogo.exe                <=== RODAR
 
@@ -95,8 +94,6 @@ int main(){
         SortearEvento(tipoevento); // funcao pra gerar aleatorimente o q vai ser
         AnunciarEvento(tipoevento); // imprimir pro player o que e
         
-        /*Pocao ptemp;
-        ptemp.CriarPocao(nivelatual, num_niveis);*/
         Elemento item_temp;
 
         // Switch entre batalha, vazio e elemento
@@ -114,12 +111,12 @@ int main(){
                 int tipo_elemento;
                 uniform_int_distribution<> distr(1, 2);
                 tipo_elemento = distr(gen);
-                if (tipo_elemento = 1) {
+                if (tipo_elemento == 1) {
                     item_temp = criarArma(nivelatual, num_niveis);
-                    cout << "Arma criada: " << item_temp.nome << ", Dano: " << item_temp.dano << "\n";
+                    cout << "Arma encontrada: " << item_temp.nome << ", Dano: " << item_temp.dano << "\n";
                 } else {
                     item_temp = criarPocao(nivelatual, num_niveis);
-                    cout << "Pocao criada: " << item_temp.nome << ", Cura: " << item_temp.cura << "\n";
+                    cout << "Pocao encontrada: " << item_temp.nome << ", Cura: " << item_temp.cura << "\n";
                 }
                 break;
             }

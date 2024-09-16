@@ -13,6 +13,7 @@ using namespace std;
 
 // Função para criar uma arma
 Elemento criarArma(int dificuldade, int num_niveis) {
+    // nomes para as armas
     static const string nomesarmasp[10] = { 
     "Karambit",
     "Faca Tramontina",
@@ -26,11 +27,12 @@ Elemento criarArma(int dificuldade, int num_niveis) {
     "Lanca Tribal"
     };
     
-    
+    // inicializa o elemento
     Elemento item;
     item.tipo = 'A';
     item.peso = 10;
-    // nome random arma
+
+    // escolhe um nome random para arma
     static std::mt19937 gen(std::random_device{}());
     std::uniform_int_distribution<> distrNome(0, 9);
     item.nome = nomesarmasp[distrNome(gen)];
@@ -48,19 +50,20 @@ Elemento criarArma(int dificuldade, int num_niveis) {
 
 // Função para criar uma poção
 Elemento criarPocao(int dificuldade, int num_niveis) {
-    static const string nomesarmasg[5] = {
-    "Poção de Cura",
-    "Poção da Vida",
+    static const string nomesarmasg[5] = { // nomes das pocoes
+    "Pocao de Cura",
+    "Pocao da Vida",
     "Semente dos Deuses",
     "Canja de Galinha",
-    "Copão"
+    "Copao Muito Loko"
     };
 
+    // inicializa o item
     Elemento item;
     item.tipo = 'P';
     item.peso = 3;
 
-    // gerar nome random
+    // escolhe um nome random para pocao
     static std::mt19937 gen(std::random_device{}());
     std::uniform_int_distribution<> distrNome(0, 4);
     item.nome = nomesarmasg[distrNome(gen)];
