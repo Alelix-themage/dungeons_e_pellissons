@@ -9,8 +9,8 @@ class Pocao {
     public:
         Pocao();
         ~Pocao();
-        void CriarPocao(int dificuldade); // parametro dificuldade, quanto maior o nivel, melhor as pocoes
-        int Curar();
+        void CriarPocao(int dificuldade, int num_niveis); // parametro dificuldade, quanto maior o nivel, melhor as pocoes
+        int RetornarCura();
     private:
         int cura;
 };

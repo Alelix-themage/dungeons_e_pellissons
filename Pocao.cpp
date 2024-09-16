@@ -21,16 +21,24 @@ Pocao::~Pocao(){
 }
 
 
-int Pocao::Curar(){
+int Pocao::RetornarCura(){
     return cura;
 }
 
-void Pocao::CriarPocao(int dificuldade){
-    // FALTA IMPLEMENTAR DIFICULDADE
-    random_device rd;
-    mt19937 gen(rd());
-    uniform_int_distribution<> distr(5, 25);
+void Pocao::CriarPocao(int dificuldade, int num_niveis){
+    
+    static std::mt19937 gen(std::random_device{}());
+    
+    // intervalo da pocao
+    int minCura = 5;
+    int maxCura = 25;
+
+    // gerar pocao no intervalo
+    std::uniform_int_distribution<> distr(minCura, maxCura);
     cura = distr(gen);
+
+    // formula pra ajustar de acordo com a dif
+    cura = minCura + (cura - minCura) * dificuldade / num_niveis;
 }
 
 #endif
