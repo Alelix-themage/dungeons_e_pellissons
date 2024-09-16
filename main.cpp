@@ -7,6 +7,8 @@
 #include <string>
 #include <random>
 #include "Heroi.h"
+#include "Mochila.h"
+#include "Cinto.h"
 #include "Pocao.h"
 using namespace std;
 
