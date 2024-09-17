@@ -7,6 +7,9 @@
 #include <iostream>
 using namespace std;
 
+#ifndef ELEMENTO_H
+#define ELEMENTO_H
+
 Cinto::Cinto(){
     //Inicializar o contador
     count = 0;
@@ -92,3 +95,5 @@ void Cinto::RetornaItem(int &x, int p){
     x = Entry[p];
     cout << "O item que esta nessa posicao e: " << x << endl;
 }
+
+#endif

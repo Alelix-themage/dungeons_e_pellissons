@@ -4,8 +4,7 @@
 // Mateus Tiraboschi de Castro - 2200040
 
 #include <iostream>
-#include "Pocao.h"
-#include "Arma.h"
+#include "Elemento.h"
 //Classe responsável pelo cinto do Heroi
 
 const int MAX_CINTO = 10;
@@ -24,12 +23,6 @@ class Cinto{
         void SubstituiItem(int x, int p);
 
         private:
-            struct CintoHeroi{
-                //Struct reponsável por gerenciar os tipos do cinto do heroi
-                Pocao pocaoHeroi;
-                Arma armaHeroi;
-            };
-            CintoHeroi Entry[MAX_CINTO + 1];
+            int Entry[MAX_CINTO + 1];
             int count;
-
 };

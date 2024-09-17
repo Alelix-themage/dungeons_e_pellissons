@@ -22,10 +22,5 @@ class Heroi{
         string nome; 
         int vidaatual = 100;
         const int maxvida = 100;
-        
-        //Cinto e Mochila do Heroi
-        Cinto cintoHeroi;
-        Mochila mochilaHeroi;
-
 };
 
