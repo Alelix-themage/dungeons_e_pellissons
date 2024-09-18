@@ -1,5 +1,6 @@
 #include "Mochila.h"
 #include <iostream>
+#include <cstdlib>
 using namespace std;
 
 
@@ -60,4 +61,8 @@ bool Mochila :: MochilaFull(){
 
 bool Mochila :: MochilaEmpty(){
     return topo == NULL; // ira informar ao jogador caso a mochila estiver vazia
+}
+
+int Mochila :: MochilaSize(){
+    return quantidade;
 }

@@ -5,6 +5,7 @@
 
 #include <string>
 #include <random>
+#include <cstdlib> // abort
 #include "Elemento.h"
 using namespace std;
 

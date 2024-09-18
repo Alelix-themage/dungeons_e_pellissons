@@ -6,6 +6,7 @@
 #include <iostream>
 #include <string>
 #include <random>
+#include <cstdlib> // abort
 #include "Heroi.h"
 #include "Elemento.h"
 using namespace std;
@@ -62,8 +63,8 @@ void SortearEvento(short int &tipo);
 void AnunciarEvento(short int tipo);
 
 
-// g++ main.cpp Heroi.cpp Elemento.cpp -o jogo.exe  <=== COMPILAR
-// g++ -std=c++11 main.cpp Heroi.cpp Elemento.cpp -o jogo.exe
+// g++ main.cpp Heroi.cpp Elemento.cpp Mochila.cpp -o jogo.exe  <=== COMPILAR
+// g++ -std=c++11 main.cpp Heroi.cpp Elemento.cpp Mochila.cpp -o jogo.exe
 
 // .\jogo.exe                <=== RODAR
 
