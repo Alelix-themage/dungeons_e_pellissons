@@ -3,6 +3,9 @@
 // Felipe Ferreira Rangel de Almeida - 2208490
 // Mateus Tiraboschi de Castro - 2200040
 
+#ifndef ELEMENTO_H  
+#define ELEMENTO_H  
+
 #include <string>
 using namespace std;
 
@@ -14,5 +17,7 @@ struct Elemento {
     int cura;
 };
 
-Elemento criarArma(int dificuldade, int num_niveis);
-Elemento criarPocao(int dificuldade, int num_niveis);
+void criarArma(Elemento &item_temp, int dificuldade, const int num_niveis);
+void criarPocao(Elemento &item_temp, int dificuldade, const int num_niveis);
+
+#endif

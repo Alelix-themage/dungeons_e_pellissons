@@ -6,49 +6,58 @@ using namespace std;
 // contrutor
 
 Mochila :: Mochila(){
-    capacidade = 5; // capacidade inicial
-    itens = new int[capacidade]; // ira alocar dinamicamente a capacidade da mochila 
-    topo = 0; // inicia o topo vazio
+    quantidade = 0; // capacidade inicial
+    topo = NULL; // inicia o topo vazio
 }
 
 Mochila :: ~Mochila(){
-    delete[] itens; // vai liberar a memoria que foi alocada anteriormente
+    MochilaClear(); // vai liberar a memoria que foi alocada anteriormente
+    cout << "Mochila desalocada." << endl;
+}
 
+void Mochila :: MochilaPush(Elemento x){
+    PonteiroMochila p; 
+    p = new SlotMochila; // alocando slot dinamicamente
+    if (p==NULL){
+        cout << "Falha na alocacao da mochila, memoria insuficiente para rodar o jogo!!!" << endl;
+        abort();
+    }
+    p->Item = x;
+    p->ProximoItem = topo;
+    topo = p;
+    quantidade ++; // incrementa quantidade de itens
+}
+
+void Mochila :: MochilaPop(Elemento &x){
+    if(MochilaEmpty()){ // verifica se a mochila esta vazia
+        cout << "Mochila ja esta vazia não tem como remover mais itens! " << endl;
+        abort();
+    }
+    PonteiroMochila p;
+    x = topo->Item;
+    p = topo;
+    topo = topo->ProximoItem;
+    delete p;
+    quantidade--;
+}
+
+void Mochila :: MochilaClear() {
+    PonteiroMochila p;
+    while(topo != NULL) {
+        p = topo;
+        topo = topo->ProximoItem;
+        delete p;
+    }
+}
+
+void Mochila :: MochilaTop(Elemento &x){
+    x = topo->Item;
 }
 
 bool Mochila :: MochilaFull(){
-    return topo == capacidade ; // caso a mochila estiver cheia ira informar ao jogador
+    return false ; // mochila tem tamanho infinito
 }
 
 bool Mochila :: MochilaEmpty(){
-    return topo == 0; // ira informar ao jogador caso a mochila estiver vazia
-}
-
-void Mochila :: MochilaPush(int x){
-    if (MochilaFull()){
-        //Quando a mochila estiver cheia ela vai triplicar o tamanho ao jogador
-        capacidade *= 3;
-        int* maisEspaco= new int[capacidade];
-
-        // traz os itens antigos ao novo armazenamento dinamico
-        for (int i=0; i<=topo; i++){
-            maisEspaco[i] = itens[i];
-        }
-        // apaga o armazenamento inicial e usa o novo armazenamento (dinamico)
-        delete[] itens;
-        itens = maisEspaco;
-    }
-
-    topo ++; // incrementa topo
-    itens[topo] = x; // incrementa itens no top
-}
-
-void Mochila :: MochilaPop(int &x){
-    if(MochilaEmpty()){ // verifica se a mochila esta vazia
-        cout << "Mochila ja esta vazia não tem como remover mais itens! " << endl;
-
-    }else{
-        x = itens[topo]; // pega os itens do topo
-        topo --; // retira os itens do topo
-    }
+    return topo == NULL; // ira informar ao jogador caso a mochila estiver vazia
 }

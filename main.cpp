@@ -112,11 +112,12 @@ int main(){
                 uniform_int_distribution<> distr(1, 2);
                 tipo_elemento = distr(gen);
                 if (tipo_elemento == 1) {
-                    item_temp = criarArma(nivelatual, num_niveis);
+                    criarArma(item_temp, nivelatual, num_niveis);
                     cout << "Arma encontrada: " << item_temp.nome << ", Dano: " << item_temp.dano << "\n";
                 } else {
-                    item_temp = criarPocao(nivelatual, num_niveis);
+                    criarPocao(item_temp, nivelatual, num_niveis);
                     cout << "Pocao encontrada: " << item_temp.nome << ", Cura: " << item_temp.cura << "\n";
+                    player.TomarPocao(item_temp.cura);
                 }
                 break;
             }

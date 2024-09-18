@@ -8,11 +8,9 @@
 #include "Elemento.h"
 using namespace std;
 
-#ifndef ELEMENTO_H
-#define ELEMENTO_H
 
 // Função para criar uma arma
-Elemento criarArma(int dificuldade, int num_niveis) {
+void criarArma(Elemento &item_temp, int dificuldade, int num_niveis) {
     // nomes para as armas
     static const string nomesarmasp[10] = { 
     "Karambit",
@@ -27,29 +25,27 @@ Elemento criarArma(int dificuldade, int num_niveis) {
     "Lanca Tribal"
     };
     
-    // inicializa o elemento
-    Elemento item;
-    item.tipo = 'A';
-    item.peso = 10;
+
+    item_temp.tipo = 'A';
+    item_temp.peso = 10;
 
     // escolhe um nome random para arma
     static std::mt19937 gen(std::random_device{}());
     std::uniform_int_distribution<> distrNome(0, 9);
-    item.nome = nomesarmasp[distrNome(gen)];
+    item_temp.nome = nomesarmasp[distrNome(gen)];
 
-    // gerar dano random
+    // gerar dano random de acordo com a dificuldade
     int minDano = 5;
     int maxDano = 40;
     std::uniform_int_distribution<> distrDano(minDano, maxDano);
-    item.dano = distrDano(gen);
-    item.dano = minDano + (item.dano - minDano) * dificuldade / num_niveis;
-
-    return item;
+    item_temp.dano = distrDano(gen);
+    item_temp.dano = minDano + (item_temp.dano - minDano) * dificuldade / num_niveis;
+    item_temp.cura = 0;
 }
    
 
 // Função para criar uma poção
-Elemento criarPocao(int dificuldade, int num_niveis) {
+void criarPocao(Elemento &item_temp, int dificuldade, int num_niveis) {
     static const string nomesarmasg[5] = { // nomes das pocoes
     "Pocao de Cura",
     "Pocao da Vida",
@@ -58,24 +54,19 @@ Elemento criarPocao(int dificuldade, int num_niveis) {
     "Copao Muito Loko"
     };
 
-    // inicializa o item
-    Elemento item;
-    item.tipo = 'P';
-    item.peso = 3;
+    item_temp.tipo = 'P';
+    item_temp.peso = 3;
 
     // escolhe um nome random para pocao
     static std::mt19937 gen(std::random_device{}());
     std::uniform_int_distribution<> distrNome(0, 4);
-    item.nome = nomesarmasg[distrNome(gen)];
+    item_temp.nome = nomesarmasg[distrNome(gen)];
 
-    // gerar cura random
+    // gerar cura random + dificuldade
     int minCura = 5;
     int maxCura = 25;
     std::uniform_int_distribution<> distrCura(minCura, maxCura);
-    item.cura = distrCura(gen);
-    item.cura = minCura + (item.cura - minCura) * dificuldade / num_niveis;
-
-    return item;
+    item_temp.cura = distrCura(gen);
+    item_temp.cura = minCura + (item_temp.cura - minCura) * dificuldade / num_niveis;
+    item_temp.dano = 0;
 }
-
-#endif

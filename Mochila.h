@@ -3,23 +3,27 @@
 // Felipe Ferreira Rangel de Almeida - 2208490
 // Mateus Tiraboschi de Castro - 2200040
 
+#include "Elemento.h"
+
 class Mochila{
     
     public:
         Mochila();
         ~Mochila();
-        void MochilaPush(int x);
-        void MochilaPop(int &x);
+        void MochilaPush(Elemento x);
+        void MochilaPop(Elemento &x);
         bool MochilaFull ();
         bool MochilaEmpty ();
-    
-
-
+        void MochilaClear();
+        void MochilaTop(Elemento &x);
     private:
     //Mochila não tem tamnho
-    
+        struct SlotMochila{
+                Elemento Item;
+                SlotMochila *ProximoItem; // equivalente ao NextNode
+            };
+            typedef SlotMochila *PonteiroMochila;
 
-    int *itens; // ponteiro para mostrar itens da mochila
-    int topo; // mostra o item do topo
-    int capacidade; // capacidade maxima da mochila
+        PonteiroMochila topo; // mostra o item do topo
+        int quantidade; // quantidade de itens na mochila, para teste
 };
