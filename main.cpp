@@ -15,7 +15,7 @@ using namespace std;
 // VARIAVEIS
 const int larguradisplay = 52;
 const int tamanho_mapa = 15;
-const int num_niveis = 2;
+const int num_niveis = 1;
 const string RED = "\033[1;31m";
 const string RESET = "\033[0m";
 
@@ -109,17 +109,34 @@ int main(){
                 break;
             }
             case 3: {
+                // caso o tipo gerado for elemento
+                // gerar se vai ser poção ou arma aleatoriamente
                 int tipo_elemento;
                 uniform_int_distribution<> distr(1, 2);
                 tipo_elemento = distr(gen);
-                if (tipo_elemento == 1) {
+
+                if (tipo_elemento == 1) { // 1 = Arma 2 = Pocao
                     criarArma(item_temp, nivelatual, num_niveis);
-                    cout << "Arma encontrada: " << item_temp.nome << ", Dano: " << item_temp.dano << "\n";
+                    cout << "Item encontrado: " << RED << item_temp.nome << RESET << " que da " << item_temp.dano <<" pontos de HP de dano." << endl;
                 } else {
                     criarPocao(item_temp, nivelatual, num_niveis);
-                    cout << "Pocao encontrada: " << item_temp.nome << ", Cura: " << item_temp.cura << "\n";
-                    player.TomarPocao(item_temp.cura);
+                    cout << "Item encontrado: " << RED << item_temp.nome << RESET << " que cura " << item_temp.cura <<" pontos de HP." << endl;
                 }
+                // menu de opçoes
+                char op; // variavel da escolha
+                do {
+                    cout << RED << "\n-" << RESET << " O que deseja fazer com o item encontrado?" << endl;
+                    cout << RED << "[1] -" << RESET << " Colocar na Mochila" << endl;
+                    cout << RED << "[2] -" << RESET << " Colocar no Cinto" << endl;
+                    cout << RED << "[3] -" << RESET << " Descartar" << endl;
+                    cout << RED << "----> ";
+                    cin >> op;
+
+                    // verificando se o player digitou uma opção valida
+                    if (op != '1' && op != '2' && op != '3') { //diferente de 1,2,3
+                        cout << RED << "Opcao invalida! Tente novamente." << RESET << endl;
+                    }
+                } while (op != '1' && op != '2' && op != '3');
                 break;
             }
             default: {
@@ -205,7 +222,7 @@ void AnunciarEvento(short int evento){
             cout << frasesInimigo[random] << endl;;
             break;
         case 2:
-            cout << frasesNada[random] << endl;;
+            cout << frasesNada[random] << endl;
             break;
         case 3:
             cout << frasesTesouro[random] << endl;;

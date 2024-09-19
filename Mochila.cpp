@@ -13,7 +13,6 @@ Mochila :: Mochila(){
 
 Mochila :: ~Mochila(){
     MochilaClear(); // vai liberar a memoria que foi alocada anteriormente
-    cout << "Mochila desalocada." << endl;
 }
 
 void Mochila :: MochilaPush(Elemento x){

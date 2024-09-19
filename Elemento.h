@@ -17,7 +17,7 @@ struct Elemento {
     int cura;
 };
 
-void criarArma(Elemento &item_temp, int dificuldade, const int num_niveis);
-void criarPocao(Elemento &item_temp, int dificuldade, const int num_niveis);
+void criarArma(Elemento &item_temp, int dificuldade, const int num_niveis); // funcao pra criar arma
+void criarPocao(Elemento &item_temp, int dificuldade, const int num_niveis); // funcao pra criar cinto
 
 #endif
