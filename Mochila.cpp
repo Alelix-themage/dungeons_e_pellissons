@@ -9,10 +9,12 @@ using namespace std;
 Mochila :: Mochila(){
     quantidade = 0; // capacidade inicial
     topo = NULL; // inicia o topo vazio
+    cout << "Mochila criada" << endl;
 }
 
 Mochila :: ~Mochila(){
     MochilaClear(); // vai liberar a memoria que foi alocada anteriormente
+    cout << "Mochila destruida" << endl;
 }
 
 void Mochila :: MochilaPush(Elemento x){

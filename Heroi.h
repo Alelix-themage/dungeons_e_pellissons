@@ -17,6 +17,7 @@ class Heroi{
         string Nome();
         void TomarPocao(int cura);
         void TomarDano(int dano);
+        Mochila& AcessarMochila();
     private:  
         // nome e vida do Herói só pode ser acessada por métodos da classe herói
         Mochila mochilaheroi;

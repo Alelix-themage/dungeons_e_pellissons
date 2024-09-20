@@ -4,6 +4,8 @@
 // Mateus Tiraboschi de Castro - 2200040"
 
 #include <iostream>
+#include <chrono> // tempo atual do pc
+#include <limits>
 #include <string>
 #include <random>
 #include <cstdlib> // abort
@@ -53,12 +55,12 @@ const string nomesniveis[5] = {
 
 // GERADOR NUMEROS RANDOM
 random_device rd;
-mt19937 gen(rd());
+mt19937 gen(chrono::steady_clock::now().time_since_epoch().count());
 
 // FUNÇÕES
 void Logo();
 void Centralizar(int largura, string text);
-void Display(int &nivelatual, int &sqmatual, Heroi player);
+void Display(int &nivelatual, int &sqmatual, Heroi &player);
 void SortearEvento(short int &tipo);
 void AnunciarEvento(short int tipo);
 
@@ -95,7 +97,6 @@ int main(){
         SortearEvento(tipoevento); // funcao pra gerar aleatorimente o q vai ser
         AnunciarEvento(tipoevento); // imprimir pro player o que e
         
-        Elemento item_temp;
 
         // Switch entre batalha, vazio e elemento
         switch (tipoevento) {
@@ -114,6 +115,8 @@ int main(){
                 int tipo_elemento;
                 uniform_int_distribution<> distr(1, 2);
                 tipo_elemento = distr(gen);
+                Elemento item_temp;
+
 
                 if (tipo_elemento == 1) { // 1 = Arma 2 = Pocao
                     criarArma(item_temp, nivelatual, num_niveis);
@@ -122,28 +125,38 @@ int main(){
                     criarPocao(item_temp, nivelatual, num_niveis);
                     cout << "Item encontrado: " << RED << item_temp.nome << RESET << " que cura " << item_temp.cura <<" pontos de HP." << endl;
                 }
+
+
                 // menu de opçoes
                 char op; // variavel da escolha
                 do {
-                    cout << RED << "\n-" << RESET << " O que deseja fazer com o item encontrado?" << endl;
+                    cout << RED << "\n----------------------------------------------------\n" << RESET;
+                    cout << RED << "-" << RESET << " O que deseja fazer com o item encontrado?" << endl;
                     cout << RED << "[1] -" << RESET << " Colocar na Mochila" << endl;
                     cout << RED << "[2] -" << RESET << " Colocar no Cinto" << endl;
                     cout << RED << "[3] -" << RESET << " Descartar" << endl;
                     cout << RED << "----> ";
                     cin >> op;
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
                     // verificando se o player digitou uma opção valida
                     if (op != '1' && op != '2' && op != '3') { //diferente de 1,2,3
-                        cout << RED << "Opcao invalida! Tente novamente." << RESET << endl;
+                        cout << RED << "\nOpcao invalida! Tente novamente." << RESET << endl;
                     }
+
                 } while (op != '1' && op != '2' && op != '3');
-                break;
-            }
-            default: {
+                cout << RED << "\n----------------------------------------------------\n" << RESET;
+                if (op == '1'){
+                    player.AcessarMochila().MochilaPush(item_temp);
+                    cout << RED << item_temp.nome << RESET << " adicionado a mochila!" << endl;
+                    cout << "Itens na mochila: " << player.AcessarMochila().MochilaSize() << endl;
+                }
+
+                // fim do sqm de item
                 break;
             }
         }
-
+        
         cout << "\n" << RED;
         Centralizar(larguradisplay,"PRESSIONE 'ENTER' PARA AVANCAR...");
         next = cin.get();
@@ -159,7 +172,6 @@ int main(){
             sqmatual++;
         }
     }
-
     // FIM DO JOGO
     cout << "\n\n" << RED;
     Centralizar(larguradisplay, "FIM DO JOGO");
@@ -186,7 +198,7 @@ void Logo(){
     Centralizar(larguradisplay, "-= DUNGEONS & PELLISSONS =-");
 }
 
-void Display(int &nivelatual, int &sqmatual, Heroi player){
+void Display(int &nivelatual, int &sqmatual, Heroi &player){
     cout << RED << "\n\n\n\n\n\n\n\n----------------------------------------------------\n";
     Centralizar(larguradisplay, "-= DUNGEONS & PELLISSONS =-");
     cout << RED << "----------------------------------------------------\n" << RESET;

@@ -29,16 +29,16 @@ int main(){
         
     }
 
-    cout << "Itens na mochila: " << m1.MochilaSize() << endl;
-    m1.MochilaPush(itens_criados[0]);
-    cout << "Itens na mochila: " << m1.MochilaSize() << endl;
-    Elemento topomochila;
-    m1.MochilaTop(topomochila);
-    cout << "Item no topo da mochila: " << topomochila.nome << endl;
-    m1.MochilaPush(itens_criados[1]);
-    cout << "Itens na mochila: " << m1.MochilaSize() << endl;
-    m1.MochilaTop(topomochila);
-    cout << "Item no topo da mochila: " << topomochila.nome << endl;
+    for(int i = 0; i < 5; i++){
+        m1.MochilaPush(itens_criados[i]);
+        cout << "Itens na mochila: " << m1.MochilaSize() << endl;
+    }
+    for(int i = 0; i < m1.MochilaSize(); i++){
+        Elemento item;
+        m1.MochilaPop(item);
+        cout << "Item: " << item.nome << endl;
+        cout << "Itens na mochila: " << m1.MochilaSize() << endl;
+    }
 
     return 0;
 }

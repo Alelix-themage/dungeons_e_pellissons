@@ -7,8 +7,8 @@
 #include <iostream>
 using namespace std;
 
-#ifndef ELEMENTO_H
-#define ELEMENTO_H
+#ifndef CINTO_H
+#define CINTO_H
 
 Cinto::Cinto(){
     //Inicializar o contador

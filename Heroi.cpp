@@ -19,7 +19,7 @@ Heroi::Heroi(){
 };
 
 Heroi::~Heroi(){
-    
+
 };
 
 void Heroi::DefinirNome(string n){
@@ -48,5 +48,9 @@ void Heroi::TomarPocao(int cura){
 }
     cout << "Voce tomou a pocao e recuperou " << vidaatual - vidaantesdacura << " pontos de HP";
 };
+
+Mochila& Heroi::AcessarMochila(){ // metodo para acessar mochila do heroi
+    return mochilaheroi;
+}
 
 #endif
