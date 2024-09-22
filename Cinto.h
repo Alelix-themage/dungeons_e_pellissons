@@ -21,7 +21,6 @@ class Cinto{
         void LimparCinto();
         void RetornaItem(int &x, int p);
         void SubstituiItem(int x, int p);
-
     private:
         int Entry[MAX_CINTO + 1];
         int count;
