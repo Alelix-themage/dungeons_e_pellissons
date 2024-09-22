@@ -1,22 +1,21 @@
 #include <iostream>
 #include <string>
+using namespace std;
 
 //Classe responsável por detalhar os comportamentos e atributos do monstro
 class Monstro {
     public:
-        Monstro();
+        Monstro(int dificuldade, int num_niveis);
         ~Monstro();
-        void DefinirNome(std::string n );
-        int RetornarHP();
+        string Nome();
+        int Atacar();
+        int RetornarHP(); // retornar vida
+        int MaxHP(); // retornar total de vida pro display
         void TomarDano(int dano);
-        void EvolucaoMonstro();
-
     private: 
     //Características fundamentais do monstro
-        std::string nome;
-        int vida;
-        int dano;
-
-
-
+        string nome;
+        int maxvida;
+        int vida_atual;
+        int danoataque;
 };

@@ -6,7 +6,6 @@
 #include "Elemento.h"
 
 class Mochila{
-    
     public:
         Mochila();
         ~Mochila();

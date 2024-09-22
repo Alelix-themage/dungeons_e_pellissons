@@ -11,23 +11,24 @@
 #include <cstdlib> // abort
 #include "Heroi.h"
 #include "Elemento.h"
+#include "Monstro.h"
 using namespace std;
 
 
 // VARIAVEIS
 const int larguradisplay = 52;
-const int tamanho_mapa = 15;
-const int num_niveis = 1;
+const int tamanho_mapa = 5;
+const int num_niveis = 5;
 const string RED = "\033[1;31m";
 const string RESET = "\033[0m";
 
-// ANUNCIAR EVENTO
+// LISTAS COM DADOS
 static const string frasesInimigo[5] = { // frases quando encontrar um inimigo
-    "Voce encontrou um inimigo feroz!",
-    "Um inimigo apareceu magicamente!",
-    "Cuidado! Um inimigo esta a espreita!",
-    "Um inimigo bloqueia seu caminho!",
-    "A sombra de um inimigo surge na sua frente!"
+    "Voce encontrou um inimigo feroz...",
+    "Um inimigo apareceu magicamente...",
+    "Cuidado! Um inimigo esta a espreita...",
+    "Um inimigo bloqueia seu caminho...",
+    "A sombra de um inimigo surge na sua frente..."
 };
 static const string frasesNada[5] = { // frases quando n encontrar nada
     "O caminho esta vazio.",
@@ -43,8 +44,6 @@ static const string frasesTesouro[5] = { // frases quando encontrar elemento
     "Um brilho dourado revela um tesouro escondido!",
     "Incrivel! Um tesouro misterioso!"
 };
-
-// NOMES NIVEIS
 const string nomesniveis[5] = {
     "Estrada da Main", 
     "Floresta Binaria", 
@@ -55,7 +54,7 @@ const string nomesniveis[5] = {
 
 // GERADOR NUMEROS RANDOM
 random_device rd;
-mt19937 gen(chrono::steady_clock::now().time_since_epoch().count());
+mt19937 gen(chrono::steady_clock::now().time_since_epoch().count()); // gerar numero random a partir do tempo atual
 
 // FUNÇÕES
 void Logo();
@@ -64,9 +63,8 @@ void Display(int &nivelatual, int &sqmatual, Heroi &player);
 void SortearEvento(short int &tipo);
 void AnunciarEvento(short int tipo);
 
-
-// g++ main.cpp Heroi.cpp Elemento.cpp Mochila.cpp -o jogo.exe  <=== COMPILAR
-// g++ -std=c++11 main.cpp Heroi.cpp Elemento.cpp Mochila.cpp -o jogo.exe
+// g++ main.cpp Heroi.cpp Elemento.cpp Mochila.cpp Monstro.cpp -o jogo.exe  <=== COMPILAR
+// g++ -std=c++11 main.cpp Heroi.cpp Elemento.cpp Mochila.cpp Monstro.cpp -o jogo.exe
 
 // .\jogo.exe                <=== RODAR
 
@@ -102,7 +100,16 @@ int main(){
         switch (tipoevento) {
             case 1: {
                 // IMPLEMENTAR BATALHA
-                player.TomarDano(5); // teste
+                Monstro inimigo(nivelatual, num_niveis);
+                cout << "Voce encontrou um " << RED << inimigo.Nome() << RESET << "! Prepare-se para a batalha!" << endl;
+                cout << RED << '\n';
+                Centralizar(larguradisplay,"PRESSIONE 'ENTER' PARA ENTRAR NA BATALHA...");
+                char next = cin.get(); // enter para avançar
+                cout << RED << "\n----------------------------------------------------\n" << RESET;
+                Display(nivelatual, sqmatual, player); // func q mostra nivel, vida, nome, progresso
+                cout << RED << "INIMIGO: " << RESET << inimigo.Nome() << RED << " | HP: " << RESET << inimigo.RetornarHP() << "/" << inimigo.MaxHP() << endl;
+                cout << RED << "----------------------------------------------------\n\n" << RESET;
+                player.TomarDano(inimigo.Atacar()); // teste
                 break;
             }
             case 2: {
@@ -145,11 +152,12 @@ int main(){
                     }
 
                 } while (op != '1' && op != '2' && op != '3');
-                cout << RED << "\n----------------------------------------------------\n" << RESET;
+                cout << RED << "\n----------------------------------------------------\n\n" << RESET;
                 if (op == '1'){
-                    player.AcessarMochila().MochilaPush(item_temp);
+                    player.AcessarMochila().MochilaPush(item_temp); // adicionar o item na mochila do player
+
                     cout << RED << item_temp.nome << RESET << " adicionado a mochila!" << endl;
-                    cout << "Itens na mochila: " << player.AcessarMochila().MochilaSize() << endl;
+                    cout << "Itens na mochila: " << player.AcessarMochila().MochilaSize() << endl; // teste dps sera RETIRADO
                 }
 
                 // fim do sqm de item
@@ -205,7 +213,7 @@ void Display(int &nivelatual, int &sqmatual, Heroi &player){
     cout << RED << "NIVEL: " << RESET << nivelatual << RED << " | " << nomesniveis[nivelatual-1] << " | PROGRESSO: " << RESET << sqmatual << "/" << tamanho_mapa << endl;
     cout << RED << "----------------------------------------------------\n" << RESET;
     cout << RED << "HEROI: " << RESET << player.Nome() << RED << " | HP: " << RESET << player.RetornarHP() << "/100" << endl;
-    cout << RED << "----------------------------------------------------\n\n" << RESET;
+    cout << RED << "----------------------------------------------------\n" << RESET;
 }
 
 void Centralizar(int largura, string texto){
@@ -226,6 +234,7 @@ void SortearEvento(short int &tipo){
 void AnunciarEvento(short int evento){
     uniform_int_distribution<> distr(0, 4);
     int random = distr(gen);
+    cout << "\n";
 
     // recebe qual o tipo de evento e imprime uma frase random do vetor
     switch (evento)
