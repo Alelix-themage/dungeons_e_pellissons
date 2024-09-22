@@ -19,6 +19,7 @@ class Heroi{
         void TomarDano(int dano);
         Mochila& AcessarMochila();
         void MenuUsarItens();
+        
     private:  
         // nome e vida do Herói só pode ser acessada por métodos da classe herói
         Mochila mochilaheroi;
