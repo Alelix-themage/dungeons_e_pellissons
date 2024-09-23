@@ -100,20 +100,23 @@ int main(){
         switch (tipoevento) {
             case 1: {
                 // IMPLEMENTAR BATALHA
-                Monstro inimigo(nivelatual, num_niveis);
+                Monstro inimigo(nivelatual, num_niveis); // cria o objeto inimigo
                 cout << "Voce encontrou um " << RED << inimigo.Nome() << RESET << "! Prepare-se para a batalha!" << endl;
                 cout << RED << '\n';
                 Centralizar(larguradisplay,"PRESSIONE 'ENTER' PARA ENTRAR NA BATALHA...");
                 char next = cin.get(); // enter para avançar
                 cout << RED << "\n----------------------------------------------------\n" << RESET;
+
+                // LOOP DA BATALHA
+
                 Display(nivelatual, sqmatual, player); // func q mostra nivel, vida, nome, progresso
-                cout << RED << "INIMIGO: " << RESET << inimigo.Nome() << RED << " | HP: " << RESET << inimigo.RetornarHP() << "/" << inimigo.MaxHP() << endl;
+                cout << RED << "INIMIGO: " << RESET << inimigo.Nome() << RED << " | HP: " << RESET << inimigo.RetornarHP() << "/" << inimigo.MaxHP() << endl; // mostrar HP monstro
                 cout << RED << "----------------------------------------------------\n\n" << RESET;
-                player.TomarDano(inimigo.Atacar()); // teste
+                player.TomarDano(inimigo.Atacar()); // teste, player tomando 1 dano do inimigo
                 break;
             }
             case 2: {
-                // IMPLEMENTAR VAZIO
+                // IMPLEMENTAR VAZIO, se player quer usar pocao
                 break;
             }
             case 3: {
