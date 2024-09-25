@@ -6,6 +6,8 @@
 #include "Heroi.h"
 #include <string>
 #include <iostream>
+#include <limits>
+#include <cstdlib>
 using namespace std;
 
 const string RED = "\033[1;31m";
@@ -49,17 +51,13 @@ void Heroi::TomarPocao(int cura){
     cout << "Voce tomou a pocao e recuperou " << vidaatual - vidaantesdacura << " pontos de HP";
 };
 
-
-
-
-
 Mochila& Heroi::AcessarMochila(){ // metodo para acessar mochila do heroi
     
     if (mochilaheroi.MochilaSize() == 0){
         cout << "Sua mochila ta vazia!! XD" << endl;
         abort();
     }
-    cout << "\nItens na mochia: ";
+    cout << "\nItens na mochila: ";
     for (int i = 0; i < mochilaheroi.MochilaSize(); i++){
         Elemento item = mochilaheroi.AcessarItem(i);
         cout << "[" << i + 1 << "]: " << item.nome << " (";

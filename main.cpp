@@ -171,7 +171,6 @@ int main(){
         cout << "\n" << RED;
         Centralizar(larguradisplay,"PRESSIONE 'ENTER' PARA AVANCAR...");
         next = cin.get();
-        
         // Finalizar "Round"
         if (nivelatual == num_niveis && sqmatual == tamanho_mapa){
             fim = true;
@@ -182,10 +181,18 @@ int main(){
         } else {
             sqmatual++;
         }
+        // Verificador de morte
+        if (player.RetornarHP() == 0){
+            fim = true;
+        }
     }
     // FIM DO JOGO
     cout << "\n\n" << RED;
-    Centralizar(larguradisplay, "FIM DO JOGO");
+    if (player.RetornarHP() <= 0){
+        Centralizar(larguradisplay, "VOCÊ MORREU! FIM DO JOGO!");
+    } else {
+        Centralizar(larguradisplay, "PARABÉNS! FIM DO JOGO");
+    }
     Logo();
     cout << "\n\n";
 
