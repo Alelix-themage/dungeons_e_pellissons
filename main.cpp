@@ -73,8 +73,10 @@ int main(){
     int nivelatual = 1;
     int sqmatual = 1;
     bool fim = false;
+    int dano;
 
     Heroi player;
+    Elemento elemento;
 
     Logo();
     Centralizar(larguradisplay,"PRESSIONE 'ENTER' PARA INICIAR...");
@@ -108,6 +110,59 @@ int main(){
                 cout << RED << "\n----------------------------------------------------\n" << RESET;
 
                 // LOOP DA BATALHA
+               
+                while( true ){
+                    int op;
+                    cout << RED <<  "\n----------------------------------------------------------\n" << endl;
+                    cout << "1 - ATAQUE" << endl;
+                    cout << "2 - PEGUE UM ITEM DA MOCHILA" << endl;
+                    cout << "3 - PEGUE UM ITEM DO CINTO" << endl;
+                    cin >> op;
+                    cout << RESET << endl;
+                    switch (op)
+                    {
+                    case  1:
+                        dano = elemento.dano;
+                        inimigo.TomarDano(dano);
+                        if(inimigo.RetornarHP() <= 0){
+                            cout << inimigo.Nome() << " foi derrotado!" << endl;
+                            break;
+                        }
+                        else{
+                            cout << "O " << inimigo.Nome() << " recebeu " << dano << " ." << endl;
+                            cout << inimigo.Nome() << "------------- Vida: " << inimigo.RetornarHP(); 
+                            break;
+                        }
+                       
+                    case  2:
+                        cout << RED << "------------------------------------------------------------" << endl;
+                        cout << "----------------Acessando a Mochila----------------------------" << RESET << endl;
+                        player.AcessarMochila();
+                        break;
+                    
+                    case 3:
+                        player.AcessarCinto();
+
+                    default:
+                        cout << "Opcao invalida!" << endl;
+                        continue;
+                    }    
+
+                    
+                    //Condicional responsável pelo Ataque do Monstro
+                    if (inimigo.RetornarHP() > 0) {
+                        int danoMonstro = inimigo.Atacar(); //variável responsável por armazenar o dano do monstro
+                        player.TomarDano(danoMonstro); 
+                        cout << "O " << inimigo.Nome() << " atacou e causou " << danoMonstro << " de dano!" << endl;
+                        cout << player.Nome() << "------------- Vida: " << player.RetornarHP() <<  " HP"<< endl;
+                    }
+                    // Verifica se o usuário foi derrotado
+                    if (player.RetornarHP() <= 0) {
+                        cout << player.Nome() << " morreu." << endl;
+                        cout << "Game Over" << endl;
+                        break; 
+                    }
+                }
 
                 Display(nivelatual, sqmatual, player); // func q mostra nivel, vida, nome, progresso
                 cout << RED << "INIMIGO: " << RESET << inimigo.Nome() << RED << " | HP: " << RESET << inimigo.RetornarHP() << "/" << inimigo.MaxHP() << endl; // mostrar HP monstro

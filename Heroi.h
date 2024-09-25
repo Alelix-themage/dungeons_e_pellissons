@@ -19,10 +19,12 @@ class Heroi{
         void TomarDano(int dano);
         Mochila& AcessarMochila();
         void MenuUsarItens();
+        void AcessarCinto();
         
     private:  
         // nome e vida do Herói só pode ser acessada por métodos da classe herói
-        Mochila mochilaheroi;
+        Mochila mochilaHeroi;
+        Cinto cintoHeroi;
         string nome; 
         int vida_atual = 100;
         const int maxvida = 100;

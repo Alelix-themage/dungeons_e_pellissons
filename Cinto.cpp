@@ -31,7 +31,7 @@ bool Cinto::CintoCheio(){
     return 0;
 }
 
-void Cinto::InserirItem(int x, int p){
+void Cinto::InserirItem(Elemento x, int p){
     if(CintoCheio()){
         cout << "O cinto esta cheio! Nao e possivel adicionar outro item." << endl;
         abort();
@@ -52,7 +52,7 @@ void Cinto::InserirItem(int x, int p){
     count ++;
 }
 
-void Cinto::DeletarItem(int &x, int p){
+void Cinto::DeletarItem(Elemento &x, int p){
     if(CintoVazio()){
         cout << "Nao ha itens para retirar." << endl;
     }
@@ -86,14 +86,35 @@ void Cinto::LimparCinto(){
     cout << "Os itens foram removidos do cinto!" << endl;
 }
 
-void Cinto::RetornaItem(int &x, int p){
+void Cinto::RetornaItem(Elemento &x, int p){
     //Retorno dos itens que o Heroi possui
     if( p < 1 || p > count +1){
         cout << "Nao existem itens nessa posicao!" << endl;
         abort();
     }
     x = Entry[p];
-    cout << "O item que esta nessa posicao e: " << x << endl;
+    cout << "O item que esta nessa posicao e: " << x.nome << endl;
 }
+
+void Cinto::RetornaTodosItens() {
+    if (CintoVazio()) {
+        cout << "Nao ha itens no cinto!" << endl;
+        return;
+    }
+
+    cout << "Itens que o hreoi possui no cinto:" << endl;
+    for (int i = 0; i < count; i++) {
+        cout << "[" << i + 1 << "] " << Entry[i].nome;
+        
+        if (Entry[i].cura > 0) {
+            cout << " (Cura: " << Entry[i].cura << " HP)";
+        }
+        if (Entry[i].dano > 0) {
+            cout << " (Dano: " << Entry[i].dano << " HP)";
+        }
+        cout << endl;
+    }
+}
+
 
 #endif

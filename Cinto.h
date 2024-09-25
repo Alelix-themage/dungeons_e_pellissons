@@ -15,13 +15,14 @@ class Cinto{
         ~Cinto();
         bool CintoVazio();
         bool CintoCheio();
-        void InserirItem(int x, int p); // x é o elemento, e p é o índice (posição)
-        void DeletarItem(int &x, int p);
+        void InserirItem(Elemento x, int p); // x é o elemento, e p é o índice (posição)
+        void DeletarItem(Elemento &x, int p);
         int TamanhoCinto();
         void LimparCinto();
-        void RetornaItem(int &x, int p);
-        void SubstituiItem(int x, int p);
+        void RetornaItem(Elemento &x, int p);
+        void RetornaTodosItens();
+        void SubstituiItem(Elemento x, int p);
     private:
-        int Entry[MAX_CINTO + 1];
+        Elemento Entry[MAX_CINTO + 1];
         int count;
 };

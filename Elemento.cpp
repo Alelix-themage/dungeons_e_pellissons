@@ -75,5 +75,5 @@ void criarPocao(Elemento &item_temp, int dificuldade, int num_niveis) {
     uniform_int_distribution<> distrCura(minCura, maxCura);
     item_temp.cura = distrCura(gen);
     item_temp.cura = minCura + (item_temp.cura - minCura) * dificuldade / num_niveis;
-    item_temp.dano = 0;
+    item_temp.dano = 5;
 }
