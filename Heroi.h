@@ -24,7 +24,7 @@ class Heroi{
         // nome e vida do Herói só pode ser acessada por métodos da classe herói
         Mochila mochilaheroi;
         string nome; 
-        int vidaatual = 100;
+        int vida_atual = 100;
         const int maxvida = 100;
 };
 

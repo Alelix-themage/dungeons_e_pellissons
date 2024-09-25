@@ -33,22 +33,22 @@ string Heroi::Nome(){
 };
 
 int Heroi::RetornarHP(){
-    return vidaatual;
+    return vida_atual;
 };
 
 void Heroi::TomarDano(int dano){
-    vidaatual -= dano;
+    vida_atual -= dano;
     cout << "Voce tomou " << dano << " de dano." << endl;
 }
 
 void Heroi::TomarPocao(int cura){
-    int vidaantesdacura = vidaatual;
-    if (vidaatual + cura > maxvida) {
-    vidaatual = maxvida; // verificar se não vai curar a mais do max de vida do heroi
+    int vidaAntesCura = vida_atual;
+    if (vida_atual + cura > maxvida) {
+    vida_atual = maxvida; // verificar se não vai curar a mais do max de vida do heroi
 } else {
-    vidaatual += cura; 
+    vida_atual += cura; 
 }
-    cout << "Voce tomou a pocao e recuperou " << vidaatual - vidaantesdacura << " pontos de HP";
+    cout << "Voce tomou a pocao e recuperou " << vida_atual - vidaAntesCura << " pontos de HP";
 };
 
 Mochila& Heroi::AcessarMochila(){ // metodo para acessar mochila do heroi
