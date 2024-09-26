@@ -61,6 +61,7 @@ void Heroi::Descansar(){
     } else {
     vida_atual += 3;
     }
+    if (vida_atual != maxvida)
     cout << RED << "3 pontos de vida recuperados!" << RESET << endl;
 }
 
@@ -146,13 +147,13 @@ void Heroi::MenuCinto(Heroi &player) {
             cin >> p;
             // Validação da entrada
             while (p < 1 || p > cintoHeroi.TamanhoCinto()) {
-                cout << "Posicao inválida! Tente novamente: ";
+                cout << "Posicao invalida! Tente novamente: ";
                 cout << "----> ";
                 cin >> p;
             }
             Elemento x; // variável responsável por armazenar o item escolhido pelo usuário
-            cintoHeroi.RetornaItem(x, p); 
-            cout << "Você pegou o item: " << x.nome << endl; 
+            cintoHeroi.RetornaItem(x, p-1); 
+            cout << "Voce pegou o item: " << x.nome << endl; 
             if(x.tipo == 'P'){
                 // pocao de cura
                 cintoHeroi.DeletarItem(x, p); // tira da mochila pois o player tomou
@@ -168,10 +169,10 @@ void Heroi::MenuCinto(Heroi &player) {
             break; 
         }
         if (op == 'N' || op == 'n') {
-            cout << "Você não pegou nada do cinto!" << endl;
+            cout << "Voce nao pegou nada do cinto!" << endl;
             break;
         } else {
-            cout << "Tecla não permitida! Selecione s ou n!" << endl; 
+            cout << "Tecla nao permitida! Selecione S ou N!" << endl; 
         }
     }
     }

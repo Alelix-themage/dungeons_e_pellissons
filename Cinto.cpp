@@ -46,7 +46,7 @@ void Cinto::InserirItem(Elemento x, int p){
 
     if(pesodositens+x.peso > MAX_PESOCINTO){
         // nao pode adicionar caso exceda o quanto o cinto suporta de peso
-        cout << "Nao e possivel alocar o item no cinto, execedera seu limite de peso!." << endl;
+        cout << "Nao e possivel alocar o item no cinto, execedera seu limite de peso!" << endl;
         return;
     }
 
@@ -54,6 +54,7 @@ void Cinto::InserirItem(Elemento x, int p){
         // Só podemos adicionar itens dentro do tamanho setado por MAX_CINTO
         Entry [i + 1] = Entry[i];
     }
+    
     //adiciona x no lugar da posição p
     Entry[p] = x;
     pesodositens += x.peso;
@@ -87,7 +88,7 @@ int Cinto::TamanhoCinto(){
 void Cinto::LimparCinto(){
     //Função que retira todos os itens do cinto
     count = 0;
-    cout << "Os itens foram removidos do cinto!" << endl;
+    cout << "Os itens foram removidos do cinto!" << RESET << endl;
 }
 
 void Cinto::RetornaItem(Elemento &x, int p){
@@ -106,7 +107,7 @@ void Cinto::RetornaTodosItens() {
         return;
     }
 
-    cout << "Itens que o heroi possui no cinto:" << endl;
+    cout << RED << "Itens que o heroi possui no cinto:" << RESET << endl;
     for (int i = 1; i < count; i++) {
         cout << "[" << i << "] " << Entry[i].nome;
         
