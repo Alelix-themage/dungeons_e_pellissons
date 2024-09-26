@@ -296,7 +296,7 @@ int main(){
     if (player.RetornarHP() <= 0){
         Centralizar(larguradisplay, "VOCE MORREU! FIM DO JOGO!");
     } else {
-        Centralizar(larguradisplay, "PARABÉNS! FIM DO JOGO");
+        Centralizar(larguradisplay, "PARABENS! FIM DO JOGO");
     }
     Logo();
     return 0;
