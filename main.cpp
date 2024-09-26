@@ -257,7 +257,7 @@ int main(){
                 if (op == '1'){
                     player.AcessarMochila().MochilaPush(item_temp); // adicionar o item na mochila do player
                     cout << RED << item_temp.nome << RESET << " adicionado a mochila!" << endl;
-                    // cout << "Itens na mochila: " << player.AcessarMochila().MochilaSize() << endl; <---- TESTE
+                    
                 } else if (op == '2') {
                     // colocar no cinto
                     // IMPLEMENTAR ESCOLHA POSIÇÃO
@@ -303,8 +303,6 @@ int main(){
 }
 
 void Logo(){
-    
-
     cout << RED << "----------------------------------------------------\n";
     cout << "                           ,    ,    /\\   /\\\n";
     cout << "      ____                /( /\\ )\\  _\\ \\_/ /_\n";

@@ -36,7 +36,7 @@ void Mochila :: MochilaPush(Elemento x){
 
 void Mochila :: MochilaPop(Elemento &x){
     if(MochilaEmpty()){ // verifica se a mochila esta vazia
-        cout << "Mochila ja esta vazia não tem como remover mais itens! " << endl;
+        cout << "Mochila ja esta vazia nao tem como remover mais itens! " << endl;
         abort();
     }
     PonteiroMochila p;
