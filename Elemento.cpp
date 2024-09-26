@@ -33,7 +33,7 @@ void criarArma(Elemento &item_temp, int dificuldade, int num_niveis) {
     
 
     item_temp.tipo = 'A';
-    item_temp.peso = 10;
+    item_temp.peso = 7;
 
     // escolhe um nome random para arma
     uniform_int_distribution<> distrNome(0, 9);

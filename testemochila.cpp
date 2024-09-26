@@ -25,8 +25,7 @@ int main(){
             cout << "Arma criada: " << itens_criados[i].nome << ", Dano: " << itens_criados[i].dano << "\n";
         } else {
             cout << "Pocao: " << itens_criados[i].nome << ", Cura: " << itens_criados[i].cura << "\n";
-        }
-        
+        } 
     }
 
     for(int i = 0; i < 5; i++){

@@ -5,6 +5,10 @@
 #include <chrono> // tempo atual do pc
 using namespace std;
 
+// CORES
+const string RED = "\033[1;31m";
+const string RESET = "\033[0m";
+
 // nomes para as armas
 static const string nomesmonstros[10] = { 
 "Debugogro",
@@ -40,8 +44,8 @@ Monstro::Monstro(int dificuldade, int num_niveis){
     vida_atual = maxvida;
 
     // gerar ataque do monstro random
-    int minDanoMonstro = 5;
-    int maxDanoMonstro = 25;
+    int minDanoMonstro = 1;
+    int maxDanoMonstro = 20;
     uniform_int_distribution<> distrDano(minDanoMonstro, maxDanoMonstro);
     danoataque = distrDano(gen);
     danoataque = minDanoMonstro + (danoataque - minDanoMonstro) * dificuldade / num_niveis;
@@ -49,7 +53,6 @@ Monstro::Monstro(int dificuldade, int num_niveis){
 
 Monstro::~Monstro(){
     // Destrutor
-    cout << "Monstro foi finalizado em combate!" << endl;
 }
 
 string Monstro::Nome(){
@@ -73,5 +76,5 @@ int Monstro::MaxHP(){
 void Monstro::TomarDano(int dano){
     // Da o Dano no monstro
     vida_atual -= dano;
-    cout << "Voce deu um ataque no " << nome << " e tirou " << vida_atual << "de vida" << endl;
+    cout << RESET << "\nVoce deu um ataque em " << RED << nome << RESET << " e tirou " << RED << dano << RESET << " de vida." << endl;
 }

@@ -21,7 +21,7 @@ Heroi::Heroi(){
 };
 
 Heroi::~Heroi(){
-
+    cout << "Heroi desalocado" << endl;
 };
 
 void Heroi::DefinirNome(string n){
@@ -36,123 +36,144 @@ int Heroi::RetornarHP(){
     return vida_atual;
 };
 
-void Heroi::TomarDano(int dano){
-    vida_atual -= dano;
-    cout << "Voce tomou " << dano << " de dano." << endl;
-}
-
-void Heroi::TomarPocao(int cura){
-    int vidaAntesCura = vida_atual;
-    if (vida_atual + cura > maxvida) {
-    vida_atual = maxvida; // verificar se não vai curar a mais do max de vida do heroi
-} else {
-    vida_atual += cura; 
-}
-    cout << "Voce tomou a pocao e recuperou " << vida_atual - vidaAntesCura << " pontos de HP";
+int Heroi::RetornarDano(){
+    return dano_atual;
 };
 
-Mochila& Heroi::AcessarMochila(){ // metodo para acessar mochila do heroi
-    
-    if (mochilaHeroi.MochilaSize() == 0){
-        cout << "Sua mochila ta vazia!! XD" << endl;
-        abort();
+void Heroi::TomarDano(int dano){
+    vida_atual -= dano;
+}
+
+void Heroi::TomarPocao(Elemento pocao){
+    int vidaAntesCura = vida_atual;
+    if (vida_atual + pocao.cura > maxvida) {
+    vida_atual = maxvida; // verificar se não vai curar a mais do max de vida do heroi
+} else {
+    vida_atual += pocao.cura; 
+}
+    cout << RESET << "\nVoce tomou " << RED << pocao.nome << RESET << " e recuperou " << RED << vida_atual - vidaAntesCura << RESET <<" pontos de HP" << endl;
+};
+
+void Heroi::Descansar(){
+    int vidaAntesCura = vida_atual;
+    if (vida_atual + 3 > maxvida) {
+    vida_atual = maxvida; // verificar se não vai curar a mais do max de vida do heroi
+    } else {
+    vida_atual += 3;
     }
-    cout << "\nItens na mochila: ";
-    for (int i = 0; i < mochilaHeroi.MochilaSize(); i++){
-        Elemento item = mochilaHeroi.AcessarItem(i);
-        cout << "[" << i + 1 << "]: " << item.nome << " (";
-        if(item.cura > 0){
-            cout << "Cura: " << item.cura << " HP";
-        }else if(item.dano > 0 ){
-            cout << "Dano: " << item.dano << " HP";
-            cout << " )" << endl;
-        }
+    cout << RED << "3 pontos de vida recuperados!" << RESET << endl;
+}
 
-    }
-    int opcao;
-    
-    do {
-        cout << "Escolha um item para usar (1 a " << mochilaHeroi.MochilaSize() << "), ou 0 para cancelar: ";
-        cin >> opcao;
+void Heroi::EquiparArma(Elemento arma){
+    armaatual = arma;
+    dano_atual = arma.dano;
+}
 
-        //verifica se a entrada ta valida
-        if(cin.fail() || opcao < 0 || opcao > mochilaHeroi.MochilaSize()){
-            cin.clear(); //limpa se tiver erro
-            cin.ignore(numeric_limits<streamsize>::max(), '\n' ); // limpa a entrada
-            cout << "Opcao invalida! tente de novo! " << endl;
-            opcao = -1; // vai forcar a repeticao do looping
-        }
-    }
-    while (opcao < 0 || opcao > mochilaHeroi.MochilaSize());
-
-    //Se o jogador escolher o 0
-    if(opcao == 0){
-        cout << "Voce cancelou o uso do item! " << endl;
-        return mochilaHeroi;
-    }
-
-    //Processar o item escolhido
-    Elemento itemEscolhido = mochilaHeroi.AcessarItem(opcao - 1);
-    if(itemEscolhido.cura > 0){
-        //pocao de cura
-        cout << "Voce usou " << itemEscolhido.nome << " e curou " << itemEscolhido.cura << " HP. " << endl;
-        TomarPocao(itemEscolhido.cura); // vai curar o heroi
-
-    }else if(itemEscolhido.dano > 0){
-        // equipar arma
-        cout << "Voce equipou " << itemEscolhido.nome << " com dano de " << itemEscolhido.dano << " HP " << endl;
-
-    }
-    // remocar item da mochila
-    mochilaHeroi.RemoveItem(opcao -1);
-
-    
-    
+Mochila& Heroi::AcessarMochila(){
     return mochilaHeroi;
 }
 
+void Heroi::MenuMochila(Heroi &player){ // metodo para acessar menu da mochila do heroi
+    if (mochilaHeroi.MochilaEmpty()){ // verificar se a mochila ta vazia
+        cout << RED << "\nSua mochila esta vazia!! XD" << RESET << endl;
+        return;
+    }
+    Elemento itemtemp; // item temporario
+    mochilaHeroi.MochilaTop(itemtemp); // passa o topo da mochila para o item temporario
+    cout << RED << "\nItem no topo da mochila: " << RESET;
+    if (itemtemp.tipo == 'A') { // imprime o item que esta no topo
+        cout << RESET << "Arma: " << RED << itemtemp.nome << RESET << ", Dano: " << RED << itemtemp.dano << "\n"; 
+    } else {
+        cout << "Pocao: " << itemtemp.nome << ", Cura: " << itemtemp.cura << "\n";
+    }
+    char op;
+    do{
+        cout << RED << "-" << RESET << " O que deseja fazer?" << endl;
+        cout << RED << "[1] -" << RESET << " Utilizar item" << endl;
+        cout << RED << "[2] -" << RESET << " Descartar item (Nao podera recupera-lo depois)" << endl;
+        cout << RED << "----> ";
+        cin >> op;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // limpa buffer
 
-void Heroi::AcessarCinto() {
+        // verificando se o player digitou uma opção valida
+        if (op != '1' && op != '2') { //diferente de 1,2,3
+            cout << RED << "\nOpcao invalida! Tente novamente." << RESET << endl;
+        }
+    } while (op != '1' && op != '2');
+
+    cout << RED << "\n----------------------------------------------------\n";
+
+    if (op == '1') { // utilizar item
+        if (itemtemp.tipo == 'A') { // se for arma
+            // equipar arma
+            cout << RESET << "\nVoce equipou a arma " << RED << itemtemp.nome << ", que da " << RED << itemtemp.dano << RESET << " de dano." << endl;
+            mochilaHeroi.MochilaPop(itemtemp); // tira da mochila pois foi para a mao do player
+            player.EquiparArma(itemtemp); // equipa a arma na mao do player
+        } else { // se for pocao o topo da mochila
+            // pocao de cura
+            mochilaHeroi.MochilaPop(itemtemp); // tira da mochila pois o player tomou
+            player.TomarPocao(itemtemp); // vai curar o heroi
+        }
+    } else { // descartar item
+        cout << "Voce descartou o item " << itemtemp.nome << "!" << endl;
+        mochilaHeroi.MochilaPop(itemtemp); // descartar item
+    }
+}
+
+Cinto& Heroi::AcessarCinto(){
+    return cintoHeroi;
+}
+
+void Heroi::MenuCinto(Heroi &player) {
     // método responsável por permitir que o usuário acesse o cinto
 
     // Exibe todos os itens no cinto
     cintoHeroi.RetornaTodosItens();
-
+    if (cintoHeroi.CintoVazio()) { // verificar se o cinto esta vazio
+        return;
+    }
+    
     char op; // Variável para armazenar a opção do usuário
-    while (true) {
-        cout << "Deseja pegar algum item do cinto? (s/n)" << endl;
+    if (!cintoHeroi.CintoVazio()){
+        while (true) {
+        cout << "Deseja pegar algum item do cinto? [S/N]" << endl;
         cin >> op;
 
         if (op == 'S' || op == 's') {
             int p; // Para armazenar a posição do item escolhido
             cout << "Escolha um item do cinto (1 a " << cintoHeroi.TamanhoCinto() << "): ";
             cin >> p;
-
             // Validação da entrada
             while (p < 1 || p > cintoHeroi.TamanhoCinto()) {
                 cout << "Posição inválida! Tente novamente: ";
+                cout << "----> ";
                 cin >> p;
             }
-
             Elemento x; // variável responsável por armazenar o item escolhido pelo usuário
             cintoHeroi.RetornaItem(x, p); 
             cout << "Você pegou o item: " << x.nome << endl; 
             if(x.tipo == 'P'){
-                vida_atual = vida_atual + x.cura;
-                cout << "Heroi recebe "  << x.cura << " de HP" << endl;
+                // pocao de cura
+                cintoHeroi.DeletarItem(x, p); // tira da mochila pois o player tomou
+                player.TomarPocao(x); // vai curar o heroi
+    
             }
             else {
+                 // equipar arma
+                cout << RESET << "\nVoce equipou a arma " << RED << itemtemp.nome << ", que da " << RED << itemtemp.dano << RESET << " de dano." << endl;
+                mochilaHeroi.MochilaPop(itemtemp); // tira da mochila pois foi para a mao do player
+                player.EquiparArma(itemtemp); // equipa a arma na mao do player
                 cout << "O heroi pegou " <<  x.nome << "." << endl;
             }
             break; 
         }
-
         if (op == 'N' || op == 'n') {
             cout << "Você não pegou nada do cinto!" << endl;
             break;
         } else {
             cout << "Tecla não permitida! Selecione s ou n!" << endl; 
         }
+    }
     }
 }
 

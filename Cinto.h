@@ -7,7 +7,8 @@
 #include "Elemento.h"
 //Classe responsável pelo cinto do Heroi
 
-const int MAX_CINTO = 10;
+const int MAX_CINTO = 5;
+const int MAX_PESOCINTO = 15;
 
 class Cinto{
     public:
@@ -21,8 +22,8 @@ class Cinto{
         void LimparCinto();
         void RetornaItem(Elemento &x, int p);
         void RetornaTodosItens();
-        void SubstituiItem(Elemento x, int p);
     private:
-        Elemento Entry[MAX_CINTO + 1];
+        Elemento Entry[MAX_CINTO+1];
         int count;
+        int pesodositens = 0; // variavel pra verificar se n excedeu o limite de peso
 };

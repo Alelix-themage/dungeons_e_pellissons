@@ -5,7 +5,11 @@
 
 #include "Cinto.h"
 #include <iostream>
+#include <cstdlib>
 using namespace std;
+
+const string RED = "\033[1;31m";
+const string RESET = "\033[0m";
 
 #ifndef CINTO_H
 #define CINTO_H
@@ -16,31 +20,34 @@ Cinto::Cinto(){
 }
 
 Cinto::~Cinto(){
-    cout << "Cinto destruido!" << endl;
+    cout << "Cinto desalocado" << endl;
 }
 
 bool Cinto::CintoVazio(){
-    count == 0;
-    cout << "O cinto esta vazio! E possivel inserir um item" << endl;
-    return 0;
+    return count == 0; // retorna true se a quantidade de itens no cinto for 0
 }
 
 bool Cinto::CintoCheio(){
-    count == MAX_CINTO;
-    cout << "Nao e possivel adicionar itens, o cinto esta cheio!" << endl;
-    return 0;
+    return count == MAX_CINTO; // retorna true se a quantidade de itens no cinto for igual a definida como a maxima
 }
 
 void Cinto::InserirItem(Elemento x, int p){
     if(CintoCheio()){
         cout << "O cinto esta cheio! Nao e possivel adicionar outro item." << endl;
-        abort();
+        return;
     }
 
     if(p < 1 || p > count+1){
         //O item não pode entrar em índices menores que 0 e nem maiores que o count mais 1, 
         //são posições inválidas para uma lista
         cout << "Nao e possivel alocar o item nesse espaco! Ultrapassa o tamanho do cinto." << endl;
+        return;
+    }
+
+    if(pesodositens+x.peso > MAX_PESOCINTO){
+        // nao pode adicionar caso exceda o quanto o cinto suporta de peso
+        cout << "Nao e possivel alocar o item no cinto, execedera seu limite de peso!." << endl;
+        return;
     }
 
     for(int i = count; i >= p; i--){
@@ -49,20 +56,23 @@ void Cinto::InserirItem(Elemento x, int p){
     }
     //adiciona x no lugar da posição p
     Entry[p] = x;
+    pesodositens += x.peso;
     count ++;
 }
 
 void Cinto::DeletarItem(Elemento &x, int p){
     if(CintoVazio()){
         cout << "Nao ha itens para retirar." << endl;
+        return;
     }
-
-    if(p < 1 || p > count + 1){
+    if(p < 1 || p > count){
         cout << "Posicao invalida!" << endl;
-        abort();
+        return;
     }
 
     x = Entry[p]; //x recebe o valor da posição p
+    pesodositens -= Entry[p].peso; // tira o peso do item a ser removido
+    // remover o item
     for(int i = p + 1; i < count; i++){
         Entry[i] = Entry[i + 1];
     }
@@ -70,14 +80,8 @@ void Cinto::DeletarItem(Elemento &x, int p){
 }
 
 int Cinto::TamanhoCinto(){
-    // Retorna o tamanho da Mochila e os itens inseridos
-    if(CintoVazio()){
-        cout << "Ainda nao ha itens no cinto!" << endl;
-    }
-    else{
-        cout << "Seu cinto possui: " << count << " itens" << endl;
-    }
-
+    // Retorna quantos itens tem no cinto
+    return count;
 }
 
 void Cinto::LimparCinto(){
@@ -90,7 +94,7 @@ void Cinto::RetornaItem(Elemento &x, int p){
     //Retorno dos itens que o Heroi possui
     if( p < 1 || p > count +1){
         cout << "Nao existem itens nessa posicao!" << endl;
-        abort();
+        return;
     }
     x = Entry[p];
     cout << "O item que esta nessa posicao e: " << x.nome << endl;
@@ -98,13 +102,13 @@ void Cinto::RetornaItem(Elemento &x, int p){
 
 void Cinto::RetornaTodosItens() {
     if (CintoVazio()) {
-        cout << "Nao ha itens no cinto!" << endl;
+        cout << RED << "Cinto esta vazio!" << RESET << endl;
         return;
     }
 
-    cout << "Itens que o hreoi possui no cinto:" << endl;
-    for (int i = 0; i < count; i++) {
-        cout << "[" << i + 1 << "] " << Entry[i].nome;
+    cout << "Itens que o heroi possui no cinto:" << endl;
+    for (int i = 1; i < count; i++) {
+        cout << "[" << i << "] " << Entry[i].nome;
         
         if (Entry[i].cura > 0) {
             cout << " (Cura: " << Entry[i].cura << " HP)";

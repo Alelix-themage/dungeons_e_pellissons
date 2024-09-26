@@ -14,19 +14,24 @@ class Heroi{
         ~Heroi();
         void DefinirNome(string n);
         int RetornarHP();
+        int RetornarDano();
         string Nome();
-        void TomarPocao(int cura);
+        void TomarPocao(Elemento pocao);
+        void EquiparArma(Elemento arma);
         void TomarDano(int dano);
         Mochila& AcessarMochila();
-        void MenuUsarItens();
-        void AcessarCinto();
-        
+        void MenuMochila(Heroi &player);
+        Cinto& AcessarCinto();
+        void MenuCinto(Heroi &player);
+        void Descansar();
     private:  
         // nome e vida do Herói só pode ser acessada por métodos da classe herói
         Mochila mochilaHeroi;
         Cinto cintoHeroi;
-        string nome; 
+        string nome;
+        int dano_atual = 5; // dano padrão do heroi, como um 'soco'
         int vida_atual = 100;
+        Elemento armaatual;
         const int maxvida = 100;
 };
 
