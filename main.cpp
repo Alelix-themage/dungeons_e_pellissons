@@ -63,7 +63,7 @@ void Display(int &nivelatual, int &sqmatual, Heroi &player);
 void SortearEvento(short int &tipo);
 void AnunciarEvento(short int tipo);
 
-// g++ main.cpp Heroi.cpp Elemento.cpp Mochila.cpp Monstro.cpp -o jogo.exe  <=== COMPILAR
+// g++ main.cpp Heroi.cpp Elemento.cpp Mochila.cpp Monstro.cpp Cinto.cpp -o jogo.exe  <=== COMPILAR
 // g++ -std=c++11 main.cpp Heroi.cpp Elemento.cpp Mochila.cpp Monstro.cpp -o jogo.exe
 
 // .\jogo.exe                <=== RODAR

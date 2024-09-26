@@ -88,7 +88,7 @@ Mochila& Heroi::AcessarMochila(){ // metodo para acessar mochila do heroi
     //Se o jogador escolher o 0
     if(opcao == 0){
         cout << "Voce cancelou o uso do item! " << endl;
-        return;
+        return mochilaHeroi;
     }
 
     //Processar o item escolhido
