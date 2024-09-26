@@ -161,7 +161,7 @@ void Heroi::MenuCinto(Heroi &player) {
             else {
                  // equipar arma
                 cout << RESET << "\nVoce equipou a arma " << RED << x.nome << ", que da " << RED << x.dano << RESET << " de dano." << endl;
-                mochilaHeroi.MochilaPop(x); // tira da mochila pois foi para a mao do player
+                cintoHeroi.DeletarItem(x, p); // tira da mochila pois foi para a mao do player
                 player.EquiparArma(x); // equipa a arma na mao do player
                 cout << "O heroi pegou " <<  x.nome << "." << endl;
             }
