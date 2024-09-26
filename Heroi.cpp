@@ -136,7 +136,8 @@ void Heroi::MenuCinto(Heroi &player) {
     char op; // Variável para armazenar a opção do usuário
     if (!cintoHeroi.CintoVazio()){
         while (true) {
-        cout << "Deseja pegar algum item do cinto? [S/N]" << endl;
+        cout << "- Deseja pegar algum item do cinto?" << RED << "[S/N]" << endl;
+        cout << RED << "----> ";
         cin >> op;
 
         if (op == 'S' || op == 's') {
@@ -145,7 +146,7 @@ void Heroi::MenuCinto(Heroi &player) {
             cin >> p;
             // Validação da entrada
             while (p < 1 || p > cintoHeroi.TamanhoCinto()) {
-                cout << "Posição inválida! Tente novamente: ";
+                cout << "Posicao inválida! Tente novamente: ";
                 cout << "----> ";
                 cin >> p;
             }
@@ -156,13 +157,12 @@ void Heroi::MenuCinto(Heroi &player) {
                 // pocao de cura
                 cintoHeroi.DeletarItem(x, p); // tira da mochila pois o player tomou
                 player.TomarPocao(x); // vai curar o heroi
-    
             }
             else {
                  // equipar arma
-                cout << RESET << "\nVoce equipou a arma " << RED << itemtemp.nome << ", que da " << RED << itemtemp.dano << RESET << " de dano." << endl;
-                mochilaHeroi.MochilaPop(itemtemp); // tira da mochila pois foi para a mao do player
-                player.EquiparArma(itemtemp); // equipa a arma na mao do player
+                cout << RESET << "\nVoce equipou a arma " << RED << x.nome << ", que da " << RED << x.dano << RESET << " de dano." << endl;
+                mochilaHeroi.MochilaPop(x); // tira da mochila pois foi para a mao do player
+                player.EquiparArma(x); // equipa a arma na mao do player
                 cout << "O heroi pegou " <<  x.nome << "." << endl;
             }
             break; 

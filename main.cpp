@@ -32,7 +32,7 @@ static const string frasesInimigo[5] = { // frases quando encontrar um inimigo
 };
 static const string frasesNada[5] = { // frases quando n encontrar nada
     "O caminho esta vazio, voce descansa.",
-    "Voce nao encontrou nada de interessante,.",
+    "Voce nao encontrou nada de interessante, aproveita e descansa.",
     "Nada a vista. Voce toma uma agua e continua explorando.",
     "Parece que nao ha nada aqui, voce da uma esticada nas pernas.",
     "Tudo quieto. Pode tomar um ar."
@@ -198,7 +198,7 @@ int main(){
                     switch (op)
                     {
                     case '1':
-                        cout << "Voce avança em sua jornada!" << endl;
+                        cout << "Voce avanca em sua jornada!" << endl;
                         fimdescanso = true;
                         break;
                     case '2':
