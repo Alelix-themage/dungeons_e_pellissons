@@ -3,8 +3,8 @@
 // Felipe Ferreira Rangel de Almeida - 2208490
 // Mateus Tiraboschi de Castro - 2200040"
 
-// g++ main.cpp Heroi.cpp Elemento.cpp Mochila.cpp Monstro.cpp Cinto.cpp -o jogo.exe  <=== COMPILAR
-// g++ -std=c++11 main.cpp Heroi.cpp Elemento.cpp Mochila.cpp Monstro.cpp Cinto.cpp -o jogo.exe
+// g++ main.cpp Heroi.cpp Elemento.cpp Mochila.cpp Monstro.cpp Cinto.cpp HighScore.cpp -o jogo.exe  <=== COMPILAR
+// g++ -std=c++11 main.cpp Heroi.cpp Elemento.cpp Mochila.cpp Monstro.cpp Cinto.cpp HighScore.cpp -o jogo.exe
 
 // .\jogo.exe                <=== RODAR
 
@@ -17,6 +17,7 @@
 #include "Heroi.h"
 #include "Elemento.h"
 #include "Monstro.h"
+#include "HighScore.h"
 using namespace std;
 
 
@@ -162,6 +163,7 @@ int main(){
                         // Verifica se o usuário foi derrotado
                         if (player.RetornarHP() <= 0) {
                             cout << RED << player.Nome() << " foi derrotado em combate." << endl;
+                            HighScore(player.Nome(), nivelatual);
                             break; 
                         }
                     }
@@ -304,8 +306,10 @@ int main(){
     cout << "\n\n" << RED;
     if (player.RetornarHP() <= 0){
         Centralizar(larguradisplay, "VOCE MORREU! FIM DO JOGO!");
+        HighScore(player.Nome(), nivelatual);
     } else {
         Centralizar(larguradisplay, "PARABENS! FIM DO JOGO");
+        HighScore(player.Nome(), nivelatual);
     }
     Logo();
     return 0;
