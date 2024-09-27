@@ -8,6 +8,8 @@
 #include <cstdlib>
 using namespace std;
 
+const string RED = "\033[1;31m";
+const string RESET = "\033[0m";
 
 // contrutor
 
@@ -32,6 +34,7 @@ void Mochila :: MochilaPush(Elemento x){
     p->ProximoItem = topo;
     topo = p;
     quantidade ++; // incrementa quantidade de itens
+    cout << RED << x.nome << RESET << " adicionado a mochila!" << endl;
 }
 
 void Mochila :: MochilaPop(Elemento &x){

@@ -3,6 +3,11 @@
 // Felipe Ferreira Rangel de Almeida - 2208490
 // Mateus Tiraboschi de Castro - 2200040"
 
+// g++ main.cpp Heroi.cpp Elemento.cpp Mochila.cpp Monstro.cpp Cinto.cpp -o jogo.exe  <=== COMPILAR
+// g++ -std=c++11 main.cpp Heroi.cpp Elemento.cpp Mochila.cpp Monstro.cpp Cinto.cpp -o jogo.exe
+
+// .\jogo.exe                <=== RODAR
+
 #include <iostream>
 #include <chrono> // tempo atual do pc
 #include <limits>
@@ -62,11 +67,6 @@ void Centralizar(int largura, string text);
 void Display(int &nivelatual, int &sqmatual, Heroi &player);
 void SortearEvento(short int &tipo);
 void AnunciarEvento(short int tipo);
-
-// g++ main.cpp Heroi.cpp Elemento.cpp Mochila.cpp Monstro.cpp Cinto.cpp -o jogo.exe  <=== COMPILAR
-// g++ -std=c++11 main.cpp Heroi.cpp Elemento.cpp Mochila.cpp Monstro.cpp Cinto.cpp -o jogo.exe
-
-// .\jogo.exe                <=== RODAR
 
 int main(){
 
@@ -257,13 +257,10 @@ int main(){
                 cout << RED << "\n----------------------------------------------------\n\n" << RESET;
                 if (op == '1'){
                     player.AcessarMochila().MochilaPush(item_temp); // adicionar o item na mochila do player
-                    cout << RED << item_temp.nome << RESET << " adicionado a mochila!" << endl;
-                    
                 } else if (op == '2') {
                     // colocar no cinto
                     // IMPLEMENTAR ESCOLHA POSIÇÃO
                     player.AcessarCinto().InserirItem(item_temp, player.AcessarCinto().TamanhoCinto() + 1); // adicionar o item na mochila do player
-                    cout << RED << item_temp.nome << RESET << " adicionado ao cinto" << endl;
                 } else if (op == '3') {
                     if(item_temp.tipo == 'P'){
                     // pocao de cura

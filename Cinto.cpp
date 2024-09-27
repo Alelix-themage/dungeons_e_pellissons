@@ -55,11 +55,11 @@ void Cinto::InserirItem(Elemento x, int p){
         Entry [i + 1] = Entry[i];
     }
     
+    cout << RED << x.nome << RESET << " adicionado ao cinto" << endl;
     //adiciona x no lugar da posição p
     Entry[p] = x;
     pesodositens += x.peso;
     count ++;
-    cout << "ADICIONOU BB" << endl;
 }
 
 void Cinto::DeletarItem(Elemento &x, int p){
