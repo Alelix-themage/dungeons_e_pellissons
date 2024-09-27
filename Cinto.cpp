@@ -59,6 +59,7 @@ void Cinto::InserirItem(Elemento x, int p){
     Entry[p] = x;
     pesodositens += x.peso;
     count ++;
+    cout << "ADICIONOU BB" << endl;
 }
 
 void Cinto::DeletarItem(Elemento &x, int p){
@@ -108,13 +109,12 @@ void Cinto::RetornaTodosItens() {
     }
 
     cout << RED << "Itens que o heroi possui no cinto:" << RESET << endl;
-    for (int i = 1; i < count; i++) {
-        cout << "[" << i << "] " << Entry[i].nome;
+    for (int i = 1; i < count+1; i++) {
+        cout << RED << "[" << i << "] " << RESET << Entry[i].nome;
         
-        if (Entry[i].cura > 0) {
+        if (Entry[i].tipo == 'P') {
             cout << " (Cura: " << Entry[i].cura << " HP)";
-        }
-        if (Entry[i].dano > 0) {
+        } else {
             cout << " (Dano: " << Entry[i].dano << " HP)";
         }
         cout << endl;

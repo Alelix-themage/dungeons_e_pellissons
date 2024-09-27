@@ -42,7 +42,7 @@ Monstro::Monstro(int dificuldade, int num_niveis){
     
     // gerar vida do monstro random
     int minVidaMonstro = 5;
-    int maxVidaMonstro = 100;
+    int maxVidaMonstro = 50;
     uniform_int_distribution<> distrVida(minVidaMonstro, maxVidaMonstro);
     maxvida = distrVida(gen);
     maxvida = minVidaMonstro + (maxvida - minVidaMonstro) * dificuldade / num_niveis; // gera conforme a dificuldade
@@ -80,6 +80,10 @@ int Monstro::MaxHP(){
 
 void Monstro::TomarDano(int dano){
     // Da o Dano no monstro
+    if (dano >= vida_atual) {
+        cout << RESET << "\nVoce deu um ataque em " << RED << nome << RESET << " e tirou " << RED << vida_atual << RESET << " de vida." << endl;
+    } else {
+        cout << RESET << "\nVoce deu um ataque em " << RED << nome << RESET << " e tirou " << RED << dano << RESET << " de vida." << endl;
+    }
     vida_atual -= dano;
-    cout << RESET << "\nVoce deu um ataque em " << RED << nome << RESET << " e tirou " << RED << dano << RESET << " de vida." << endl;
 }

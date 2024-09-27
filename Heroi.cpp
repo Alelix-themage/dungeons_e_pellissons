@@ -4,6 +4,7 @@
 // Mateus Tiraboschi de Castro - 2200040
 
 #include "Heroi.h"
+#include "Elemento.h"
 #include <string>
 #include <iostream>
 #include <limits>
@@ -17,7 +18,11 @@ const string RESET = "\033[0m";
 #define HEROI_H
 
 Heroi::Heroi(){
-    
+    Elemento armainicial; // inicializar arma atual
+    armainicial.nome = "Soco";
+    armainicial.dano = 5;
+    armainicial.tipo = 'A';
+    armaatual = armainicial;
 };
 
 Heroi::~Heroi(){
@@ -31,6 +36,10 @@ void Heroi::DefinirNome(string n){
 string Heroi::Nome(){
     return nome;
 };
+
+Elemento& Heroi::ArmaAtual(){
+    return armaatual;
+}
 
 int Heroi::RetornarHP(){
     return vida_atual;
@@ -92,15 +101,16 @@ void Heroi::MenuMochila(Heroi &player){ // metodo para acessar menu da mochila d
         cout << RED << "-" << RESET << " O que deseja fazer?" << endl;
         cout << RED << "[1] -" << RESET << " Utilizar item" << endl;
         cout << RED << "[2] -" << RESET << " Descartar item (Nao podera recupera-lo depois)" << endl;
+        cout << RED << "[3] -" << RESET << " Sair da mochila" << endl;
         cout << RED << "----> ";
         cin >> op;
         cin.ignore(numeric_limits<streamsize>::max(), '\n'); // limpa buffer
 
         // verificando se o player digitou uma opção valida
-        if (op != '1' && op != '2') { //diferente de 1,2,3
+        if (op != '1' && op != '2' && op != '3') { //diferente de 1,2,3
             cout << RED << "\nOpcao invalida! Tente novamente." << RESET << endl;
         }
-    } while (op != '1' && op != '2');
+    } while (op != '1' && op != '2' && op != '3');
 
     cout << RED << "\n----------------------------------------------------\n";
 
@@ -115,9 +125,11 @@ void Heroi::MenuMochila(Heroi &player){ // metodo para acessar menu da mochila d
             mochilaHeroi.MochilaPop(itemtemp); // tira da mochila pois o player tomou
             player.TomarPocao(itemtemp); // vai curar o heroi
         }
-    } else { // descartar item
+    } else if (op == '2') { // descartar item
         cout << "Voce descartou o item " << itemtemp.nome << "!" << endl;
         mochilaHeroi.MochilaPop(itemtemp); // descartar item
+    } else {
+        return;
     }
 }
 
@@ -137,13 +149,13 @@ void Heroi::MenuCinto(Heroi &player) {
     char op; // Variável para armazenar a opção do usuário
     if (!cintoHeroi.CintoVazio()){
         while (true) {
-        cout << "- Deseja pegar algum item do cinto?" << RED << "[S/N]" << endl;
+        cout << RED << "-" << RESET << " Deseja utilizar algum item do cinto?" << RED << " [S/N]" << endl;
         cout << RED << "----> ";
         cin >> op;
-
+        cout << RED << "\n----------------------------------------------------\n";
         if (op == 'S' || op == 's') {
             int p; // Para armazenar a posição do item escolhido
-            cout << "Escolha um item do cinto (1 a " << cintoHeroi.TamanhoCinto() << "): ";
+            cout << RED << "-" << RESET << " Escolha um item do cinto " << RED << "[1 a " << cintoHeroi.TamanhoCinto() << "]" << RESET << " : ";
             cin >> p;
             // Validação da entrada
             while (p < 1 || p > cintoHeroi.TamanhoCinto()) {
@@ -152,7 +164,7 @@ void Heroi::MenuCinto(Heroi &player) {
                 cin >> p;
             }
             Elemento x; // variável responsável por armazenar o item escolhido pelo usuário
-            cintoHeroi.RetornaItem(x, p-1); 
+            cintoHeroi.RetornaItem(x, p); 
             cout << "Voce pegou o item: " << x.nome << endl; 
             if(x.tipo == 'P'){
                 // pocao de cura

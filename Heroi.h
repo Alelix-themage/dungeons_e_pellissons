@@ -16,6 +16,7 @@ class Heroi{
         int RetornarHP();
         int RetornarDano();
         string Nome();
+        Elemento& ArmaAtual();
         void TomarPocao(Elemento pocao);
         void EquiparArma(Elemento arma);
         void TomarDano(int dano);
