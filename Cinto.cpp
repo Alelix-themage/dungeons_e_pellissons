@@ -20,7 +20,6 @@ Cinto::Cinto(){
 }
 
 Cinto::~Cinto(){
-    cout << "Cinto desalocado" << endl;
 }
 
 bool Cinto::CintoVazio(){
@@ -40,7 +39,9 @@ void Cinto::InserirItem(Elemento x, int p){
     if(p < 1 || p > count+1){
         //O item não pode entrar em índices menores que 0 e nem maiores que o count mais 1, 
         //são posições inválidas para uma lista
+        cout << RED << "\n----------------------------------------------------\n";
         cout << "Nao e possivel alocar o item nesse espaco! Ultrapassa o tamanho do cinto." << endl;
+        cout << RED << "\n----------------------------------------------------\n";
         return;
     }
 
@@ -99,25 +100,22 @@ void Cinto::RetornaItem(Elemento &x, int p){
         return;
     }
     x = Entry[p];
-    cout << "O item que esta nessa posicao e: " << x.nome << endl;
 }
 
 void Cinto::RetornaTodosItens() {
     if (CintoVazio()) {
-        cout << RED << "Cinto esta vazio!" << RESET << endl;
+        cout << RED << "ITENS DO CINTO: " << RESET << "Nenhum! Cinto vazio..." << endl;
         return;
     }
-
-    cout << RED << "Itens que o heroi possui no cinto:" << RESET << endl;
+    cout << RED << "ITENS DO CINTO: [" << TamanhoCinto() << "/" << MAX_CINTO << "] - CAPACIDADE DE PESO: [" << pesodositens << "kg/" << MAX_PESOCINTO << "kg]" << RESET << endl;
     for (int i = 1; i < count+1; i++) {
         cout << RED << "[" << i << "] " << RESET << Entry[i].nome;
         
         if (Entry[i].tipo == 'P') {
-            cout << " (Cura: " << Entry[i].cura << " HP)";
+            cout << " (Cura: " << Entry[i].cura << " HP) - Peso: " << Entry[i].peso << "kg" << endl;
         } else {
-            cout << " (Dano: " << Entry[i].dano << " HP)";
+            cout << " (Dano: " << Entry[i].dano << " HP) - Peso: " << Entry[i].peso << "kg" << endl;
         }
-        cout << endl;
     }
 }
 

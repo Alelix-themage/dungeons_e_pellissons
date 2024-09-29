@@ -20,7 +20,6 @@ Mochila :: Mochila(){
 
 Mochila :: ~Mochila(){
     MochilaClear(); // vai liberar a memoria que foi alocada anteriormente
-    cout << "Mochila desalocada" << endl;
 }
 
 void Mochila :: MochilaPush(Elemento x){
@@ -73,4 +72,14 @@ bool Mochila :: MochilaEmpty(){
 
 int Mochila :: MochilaSize(){
     return quantidade;
+}
+
+void Mochila :: TopoMochila(){
+    Elemento itemtopo;
+    MochilaTop(itemtopo);
+    if (itemtopo.tipo == 'P') {
+        cout << RED << "ULTIMO ITEM DA MOCHILA: " << RESET << itemtopo.nome << " (Cura: " << itemtopo.cura << " HP)" << endl;
+    } else {
+        cout << RED << "ULTIMO ITEM DA MOCHILA: " << RESET << itemtopo.nome << " (Dano: " << itemtopo.dano << " HP)" << endl;
+    }
 }

@@ -8,11 +8,11 @@ Mateus Tiraboschi de Castro - 2200040"
 
 Para compilar utilize o comando no terminal:
 
-g++ main.cpp Heroi.cpp Elemento.cpp Mochila.cpp Monstro.cpp Cinto.cpp -o (nomeexecutavel).exe
+g++ main.cpp Heroi.cpp Elemento.cpp Mochila.cpp Monstro.cpp Cinto.cpp HighScore.cpp -o (nomeexecutavel).exe
 
 Em alguns computadores é necessário utilizar:
 
-g++ -std=c++11 main.cpp Heroi.cpp Elemento.cpp Mochila.cpp Monstro.cpp Cinto.cpp -o (nomeexecutavel).exe
+g++ -std=c++11 main.cpp Heroi.cpp Elemento.cpp Mochila.cpp Monstro.cpp Cinto.cpp HighScore.cpp -o (nomeexecutavel).exe
 
 Implementamos cores no terminal de maneira bem básica, fizemos todos os testes no terminal do Visual Studio Code 
 e funcionou, porém ao testar no Terminal do Windows as cores não funcionem, se puder rodar o jogo no terminal

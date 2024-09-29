@@ -17,7 +17,7 @@ class Mochila{
         void MochilaTop(Elemento &x);
         int MochilaSize();
         void RemoveItem(int index);
-    
+        void TopoMochila();
     private:
     //Mochila não tem tamnho
         struct SlotMochila{

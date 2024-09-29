@@ -23,7 +23,7 @@ using namespace std;
 
 // VARIAVEIS
 const int larguradisplay = 52;
-const int tamanho_mapa = 5;
+const int tamanho_mapa = 3;
 const int num_niveis = 5;
 const string RED = "\033[1;31m";
 const string RESET = "\033[0m";
@@ -141,11 +141,11 @@ int main(){
                         }
                         break;
                     case  '2':
-                        Centralizar(larguradisplay, "MENU MOCHILA");
+                        Centralizar(larguradisplay, "MENU MOCHILA\n");
                         player.MenuMochila(player);
                         break;
                     case '3':
-                        Centralizar(larguradisplay, "MENU CINTO");
+                        Centralizar(larguradisplay, "MENU CINTO\n");
                         player.MenuCinto(player);
                         break;
                     default:
@@ -163,15 +163,16 @@ int main(){
                         // Verifica se o usuário foi derrotado
                         if (player.RetornarHP() <= 0) {
                             cout << RED << player.Nome() << " foi derrotado em combate." << endl;
-                            HighScore(player.Nome(), nivelatual);
+                            HighScore(player.Nome(), nivelatual, num_niveis, sqmatual, tamanho_mapa);
                             break; 
                         }
                     }
                     // proximo round da batalha, se alguem tiver morto, ja pula pro prox
                     if (!fimbatalha) {
-                        cout << RED << "\n----------------------------------------------------\n";
+                        cout << RED << "----------------------------------------------------\n";
                         Centralizar(larguradisplay,"\nPRESSIONE 'ENTER' PARA CONTINUAR A BATALHA...");
                         char next = cin.get(); // enter para avançar
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // limpa buffer
                     }
                 }
                 cout << RED << "----------------------------------------------------\n\n" << RESET;
@@ -200,7 +201,7 @@ int main(){
                     switch (op)
                     {
                     case '1':
-                        cout << "Voce avanca em sua jornada!" << endl;
+                        cout << "\n - Voce avanca em sua jornada!" << endl;
                         fimdescanso = true;
                         break;
                     case '2':
@@ -208,7 +209,7 @@ int main(){
                         player.MenuMochila(player);
                         break;
                     case '3':
-                        Centralizar(larguradisplay, "MENU CINTO");
+                        Centralizar(larguradisplay, "MENU CINTO\n");
                         player.MenuCinto(player);
                         break;
                     default:
@@ -230,16 +231,23 @@ int main(){
 
                 if (tipo_elemento == 1) { // 1 = Arma 2 = Pocao
                     criarArma(item_temp, nivelatual, num_niveis);
-                    cout << "Item encontrado: " << RED << item_temp.nome << RESET << " que da " << RED << item_temp.dano << RESET << " pontos de HP de dano." << endl;
                 } else {
                     criarPocao(item_temp, nivelatual, num_niveis);
-                    cout << "Item encontrado: " << RED << item_temp.nome << RESET << " que cura " << RED << item_temp.cura << RESET << " pontos de HP." << endl;
                 }
 
 
                 // menu de opçoes
-                char op; // variavel da escolha
-                do {
+                bool menuitem = false;
+                while (!menuitem){
+                    if (tipo_elemento == 1) { // 1 = Arma 2 = Pocao
+                        cout << "Item encontrado: " << RED << item_temp.nome << " [PESO: " << item_temp.peso << "]" << RESET << " que da " << RED << item_temp.dano << RESET << " pontos de HP de dano." << endl;
+                    } else {
+                        cout << "Item encontrado: " << RED << item_temp.nome << " [PESO: " << item_temp.peso << "]" << RESET << " que cura " << RED << item_temp.cura << RESET << " pontos de HP." << endl;
+                    }
+
+                    char op; // variavel da escolha
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // limpa buffer
+                    do {
                     cout << RED << "\n----------------------------------------------------\n" << RESET;
                     cout << RED << "-" << RESET << " O que deseja fazer com o item encontrado?" << endl;
                     cout << RED << "[1] -" << RESET << " Colocar na Mochila" << endl;
@@ -248,36 +256,53 @@ int main(){
                     cout << RED << "[4] -" << RESET << " Descartar" << endl;
                     cout << RED << "----> ";
                     cin >> op;
-                    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // limpa buffer
 
                     // verificando se o player digitou uma opção valida
                     if (op != '1' && op != '2' && op != '3' && op != '4') { //diferente de 1,2,3 e 4
                         cout << RED << "\nOpcao invalida! Tente novamente." << RESET << endl;
                     }
 
-                } while (op != '1' && op != '2' && op != '3' && op != '4');
-                cout << RED << "\n----------------------------------------------------\n\n" << RESET;
-                if (op == '1'){
-                    player.AcessarMochila().MochilaPush(item_temp); // adicionar o item na mochila do player
-                } else if (op == '2') {
-                    // colocar no cinto
-                    // IMPLEMENTAR ESCOLHA POSIÇÃO
-                    player.AcessarCinto().InserirItem(item_temp, player.AcessarCinto().TamanhoCinto() + 1); // adicionar o item na mochila do player
-                } else if (op == '3') {
-                    if(item_temp.tipo == 'P'){
-                    // pocao de cura
-                    player.TomarPocao(item_temp); // vai curar o heroi
+                    } while (op != '1' && op != '2' && op != '3' && op != '4');
+                    cout << RED << "\n----------------------------------------------------\n" << RESET;
+                    if (op == '1'){
+                        player.AcessarMochila().MochilaPush(item_temp); // adicionar o item na mochila do player
+                        menuitem = true;
+                    } else if (op == '2') { // colocar no cinto
+                        
+                        // ESCOLHA DA POSICAO
+                        int tamanhocinto = player.AcessarCinto().TamanhoCinto(); // variavel para verificar se deu certo adicionar o cinto
+                        if (player.AcessarCinto().CintoVazio()){
+                            player.AcessarCinto().InserirItem(item_temp, player.AcessarCinto().TamanhoCinto() + 1); // adicionar o item na mochila do player
+                        } else {
+                            int pos;
+                            player.AcessarCinto().RetornaTodosItens();
+                            cout << RED << "-" << RESET << " Escolha uma posicao do cinto para adicionar o item " << RED << "[1/" << player.AcessarCinto().TamanhoCinto() + 1 << "]: " << RESET;
+                            cin >> pos;
+                            player.AcessarCinto().InserirItem(item_temp, pos); // adicionar o item na mochila do player
+                        }
+                        if (player.AcessarCinto().TamanhoCinto() != tamanhocinto){ // se o tamanho atual do cinto for diferente do tamanho antes de tentar adicionar, significa que deu certo, encerrar loop
+                            menuitem = true; // finalizar loop
+                        }
+                
+                    } else if (op == '3') {
+                        if(item_temp.tipo == 'P'){
+                        // pocao de cura
+                        player.TomarPocao(item_temp); // vai curar o heroi
+                        }
+                        else {
+                        // equipar arma
+                        cout << RESET << "\nVoce equipou a arma " << RED << item_temp.nome << ", que da " << RED << item_temp.dano << RESET << " de dano." << endl;
+                        player.EquiparArma(item_temp); // equipa a arma na mao do player
+                        cout << "O heroi pegou " <<  item_temp.nome << "." << endl;
+                        }
+                        menuitem = true;   
+                    } else {
+                        cout << RED << item_temp.nome << RESET << " descartado(a)!" << endl;
+                        menuitem = true;
                     }
-                    else {
-                    // equipar arma
-                    cout << RESET << "\nVoce equipou a arma " << RED << item_temp.nome << ", que da " << RED << item_temp.dano << RESET << " de dano." << endl;
-                    player.EquiparArma(item_temp); // equipa a arma na mao do player
-                    cout << "O heroi pegou " <<  item_temp.nome << "." << endl;
-            }
-                } else {
-                    cout << RED << item_temp.nome << RESET << " descartado(a)!" << endl;
                 }
-
+                
+                
                 // fim do sqm de item
                 break;
             }
@@ -287,11 +312,13 @@ int main(){
         if (nivelatual == num_niveis && sqmatual == tamanho_mapa){ // se acabou, ganhou o jogo
             fim = true;
         }
-        if (sqmatual == tamanho_mapa){
+        if (sqmatual == tamanho_mapa && !fim){
             nivelatual++;
             sqmatual = 1;
         } else {
-            sqmatual++;
+            if (!fim){
+                sqmatual++;
+            }
         }
         // Verificador de morte
         if (player.RetornarHP() <= 0){ // se o player morreu, fim do jogo
@@ -306,10 +333,10 @@ int main(){
     cout << "\n\n" << RED;
     if (player.RetornarHP() <= 0){
         Centralizar(larguradisplay, "VOCE MORREU! FIM DO JOGO!");
-        HighScore(player.Nome(), nivelatual);
+        HighScore(player.Nome(), nivelatual, num_niveis, sqmatual, tamanho_mapa);
     } else {
         Centralizar(larguradisplay, "PARABENS! FIM DO JOGO");
-        HighScore(player.Nome(), nivelatual);
+        HighScore(player.Nome(), nivelatual, num_niveis, sqmatual, tamanho_mapa);
     }
     Logo();
     return 0;
@@ -339,6 +366,18 @@ void Display(int &nivelatual, int &sqmatual, Heroi &player){
     cout << RED << "HEROI: " << RESET << player.Nome() << RED << " | HP: " << RESET << player.RetornarHP() << "/100" << endl;
     cout << RED << "----------------------------------------------------\n" << RESET;
     cout << RED << "ARMA EQUIPADA: " << RESET << player.ArmaAtual().nome << RED << " (" << player.ArmaAtual().dano << " de dano) " << endl;
+    cout << RED << "----------------------------------------------------\n" << RESET;
+    if (player.AcessarMochila().MochilaEmpty()){
+        cout << RED << "ULTIMO ITEM DA MOCHILA: " << RESET << "Nenhum! Mochila vazia..." << endl;
+    } else {
+        player.AcessarMochila().TopoMochila();
+    }
+    cout << RED << "----------------------------------------------------\n" << RESET;
+     if (player.AcessarCinto().CintoVazio()){
+        cout << RED << "ITENS DO CINTO: " << RESET << "Nenhum! Cinto vazio..." << endl;
+    } else {
+        player.AcessarCinto().RetornaTodosItens();
+    }
     cout << RED << "----------------------------------------------------\n" << RESET;
 }
 
