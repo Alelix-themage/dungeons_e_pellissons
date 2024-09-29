@@ -19,7 +19,6 @@ void HighScore(std::string player, int nivel, int quantniveis, int progressplaye
     registro_game << "Player: " << player << std::endl;
     registro_game << "Nivel Recorde: " << nivel << "/" << quantniveis << " - Progresso " << progressplayer << "/" << progresspornivel << std::endl;
     registro_game << "----------------------------------------------------------" << std::endl;
-    
     registro_game.close();
 }
 

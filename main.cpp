@@ -23,8 +23,8 @@ using namespace std;
 
 // VARIAVEIS
 const int larguradisplay = 52;
-const int tamanho_mapa = 3;
-const int num_niveis = 5;
+const int tamanho_mapa = 5; // <--- defina o numero de sqm's por nivel
+const int num_niveis = 5; // <--- defina o numero de niveis do jogo
 const string RED = "\033[1;31m";
 const string RESET = "\033[0m";
 
